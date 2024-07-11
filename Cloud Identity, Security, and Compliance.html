@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cloud Identity, Security, and Compliance</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a61aab05-3ecb-4630-b6d5-0186c2152cde" class="page mono"><header><h1 class="page-title"><strong>Cloud Identity, Security, and Compliance</strong></h1><p class="page-description"></p></header><div class="page-body"><blockquote id="659686f1-543f-42a3-b018-0f085f48bf3d" class="">📕 Learning Objectives<ul id="61a8c35a-9310-4aa1-ae45-1348994a2fed" class="bulleted-list"><li style="list-style-type:disc">Basics aspects of managing cloud <strong>resources</strong> and related tasks</li></ul><ul id="36162dde-3b38-4ca1-a814-10ef881257a4" class="bulleted-list"><li style="list-style-type:disc">Cloud <strong>access control</strong> fundamentals</li></ul></blockquote><h2 id="c1f3fcc4-a6cf-4df9-9a92-308e4ec6a064" class=""><strong>Cloud Security</strong></h2><p id="e124b1f3-1f25-4875-90f2-48fbad9d0e89" class=""><strong>Securing</strong> cloud resources involves implementing measures and best practices to protect data, applications and infrastructure deployed in a cloud environment from unauthorized access, data breaches and other security threats. Cloud security is a shared responsibility between the <strong>cloud service provider</strong> (CSP) and the <strong>cloud user</strong> (customer).</p><p id="74fc171b-a6c9-43f5-835e-4d2526102113" class="">Intro to Cloud Security - GCP - cloud.google.com</p><figure id="1b4bbee3-458c-4436-b905-38a4b3c36ae6" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-af74d5049299f1c14b85cf051648f214a2dde5ba%252FIntro-to-Security-GCP.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=e80a3fda&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-af74d5049299f1c14b85cf051648f214a2dde5ba%252FIntro-to-Security-GCP.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=e80a3fda&amp;sv=1"/></a></figure><h3 id="04acc941-a289-483d-892d-c3a7b2a4e883" class=""><strong>Shared Responsibility Model</strong></h3><blockquote id="709b942a-f95c-45cc-9df7-56a04bc45144" class="">🔗 Shared Responsibility Model - Crowdstrike</blockquote><p id="1794e68c-7d44-402c-8d23-4f72fb5fc151" class="">Shared Responsibility Model - Crowdstrike</p><figure id="c0794e44-a12a-4695-bbae-a5c04ecf7afb" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-3766afda9a5cc02730eb11387d4f4211db451a60%252Fimage-20230528143915462.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=a29bfbfa&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-3766afda9a5cc02730eb11387d4f4211db451a60%252Fimage-20230528143915462.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=a29bfbfa&amp;sv=1"/></a></figure><table id="fa9ec763-1ee5-47a6-ba59-9449911460a6" class="simple-table"><tbody><tr id="00a37050-14b9-472b-9068-fc381621f052"><td id="bq@w" class="">Cloud Architecture</td><td id="|ijO" class="">e.g. Responsibility for IaaS</td><td id="a_{]" class="">e.g. Responsibility for PaaS</td></tr><tr id="d2e34641-52fd-4d2d-bb27-3ffd0a5336f7"><td id="bq@w" class="">Workload</td><td id="|ijO" class="">User</td><td id="a_{]" class="">User</td></tr><tr id="12275e7d-c758-41d2-a974-f34e674810e1"><td id="bq@w" class="">Services</td><td id="|ijO" class="">User</td><td id="a_{]" class="">CSP</td></tr><tr id="e609172b-fe4b-484f-b838-b6ad5751df50"><td id="bq@w" class="">Virtual Machines</td><td id="|ijO" class="">User</td><td id="a_{]" class="">CSP</td></tr><tr id="44cdc72a-48e6-4444-bc25-f96d739497fa"><td id="bq@w" class=""><em>Control Plane</em></td><td id="|ijO" class="">CSP</td><td id="a_{]" class="">CSP</td></tr><tr id="5463efcc-d87c-43fe-89bb-a08748faefc8"><td id="bq@w" class=""><strong>Virtualization</strong></td><td id="|ijO" class="">CSP</td><td id="a_{]" class="">CSP</td></tr><tr id="e999d579-5a4a-4bf5-9c48-2c75904d6f77"><td id="bq@w" class=""><strong>Physical Infrastructure</strong></td><td id="|ijO" class="">CSP</td><td id="a_{]" class="">CSP</td></tr><tr id="b5cdc625-0417-4acc-bf76-ddc549a460a7"><td id="bq@w" class=""><strong>Physical Facility</strong></td><td id="|ijO" class="">CSP</td><td id="a_{]" class="">CSP</td></tr></tbody></table><p id="f9be364f-444e-4ed2-9658-eb94e1f0406f" class="">From a security standpoint, the responsibility depends on what level of service is used.</p><p id="204f868c-7bb9-453c-be87-32c4b94f5c39" class="">At the level of <strong>data plane</strong> and <strong>control plane</strong> (tools, consoles, CLI, SDK), securing cloud resources is important and IAM is a key aspect of it.</p><ul id="0d5ce083-fabc-4708-a20a-3da4f985fa7f" class="bulleted-list"><li style="list-style-type:disc">Identity protection</li></ul><ul id="d00bb893-d103-42be-aec6-8934cfb73594" class="bulleted-list"><li style="list-style-type:disc">Strong authentication mechanisms</li></ul><ul id="c250354b-2607-4726-be43-5196bd674b97" class="bulleted-list"><li style="list-style-type:disc">Control access</li></ul><ul id="1d9bd077-a27a-4640-a73f-3947b79f4bf8" class="bulleted-list"><li style="list-style-type:disc">Data encryption</li></ul><ul id="f8ca309a-7e95-4791-b2e0-3bfa27500325" class="bulleted-list"><li style="list-style-type:disc">Network security</li></ul><ul id="15d139ed-1431-4dae-aa4c-b71fe6836ae3" class="bulleted-list"><li style="list-style-type:disc">Patching and updates</li></ul><p id="c5109242-7706-4cf7-99cb-1d8c1472a1a1" class=""><strong>Security measures must be applied to both the data and the control plane.</strong></p><h3 id="e2491775-d422-4502-b451-be1588b37ad4" class=""><strong>Defense in depth</strong></h3><p id="3b881b53-9ea1-4214-bef0-0667df0d92e4" class=""><a href="https://www.cloudflare.com/learning/security/glossary/what-is-defense-in-depth/">Defense in depth</a> (layered security) is a principle and strategy in cloud security that involves implementing multiple layers of security controls and measures to protect cloud resources from various threats and attacks.</p><ul id="668f3799-2baf-46aa-812b-cfabfc819ffb" class="bulleted-list"><li style="list-style-type:disc">Robust and resilient posture</li></ul><ul id="52dae63c-b429-41d9-9ca7-18e38c190de9" class="bulleted-list"><li style="list-style-type:disc">Mitigate the risk of a single security control</li></ul><p id="17e0cabb-700c-4a7e-8a08-96b17c3e6ee8" class="">Public Network (Perimeter)</p><ul id="a6510c4c-2dd0-42d4-942b-e2281b49ffc5" class="bulleted-list"><li style="list-style-type:disc">Public <strong>firewall</strong>, DDos Prevention, IDS/IPS, etc</li></ul><p id="a0971a70-7d08-47a1-8e21-7ed11b05acf5" class="">Local Network</p><ul id="33e4aa61-9dab-4162-a4ff-fd37c6333cd6" class="bulleted-list"><li style="list-style-type:disc">nACL, Device <strong>Hardening</strong>, Monitoring, etc</li></ul><p id="b385e947-1fed-4b5a-abe3-73ac4b6e43f4" class="">Operating System (Endpoint)</p><ul id="47b5e48e-fae5-4f50-8c2b-3359f467ce94" class="bulleted-list"><li style="list-style-type:disc">Hardening, <strong>Patching</strong>, Endpoint Protection, <strong>Monitoring</strong>, etc</li></ul><p id="e57b0d7f-3e8a-48a0-b326-d4d1161ecf43" class="">Service (Application)</p><ul id="d8b1b65d-f6d5-48e1-8905-614a2d298d3c" class="bulleted-list"><li style="list-style-type:disc"><strong>Hardening</strong>, Patching, Monitoring, Vuln Scanning, Testing, etc</li></ul><p id="0554b881-904b-46fa-aad8-ba44253f31f1" class="">Workload</p><ul id="a1c422c1-a29d-481a-a61b-b46bf0454078" class="bulleted-list"><li style="list-style-type:disc">Authentication, Authorization, Auditing, Data access control, Monitoring, <strong>Encryption</strong> (in transit &amp; at rest), MFA, etc</li></ul><p id="f616bf5a-d0ac-491e-9430-7b98dc28b8e6" class="">Defence in Depth Infographic - colohouse.com</p><figure id="6d37504e-de0f-44f9-8b7e-d2c06a4a3923" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-7d21b430241df86d09783841519362aad2d024d1%252FDefense-in-Depth-Infographic-2022.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d835bb7d&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-7d21b430241df86d09783841519362aad2d024d1%252FDefense-in-Depth-Infographic-2022.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d835bb7d&amp;sv=1"/></a></figure><p id="b4687afa-3ce5-42e1-8843-c7f0f88c3381" class="">Cloud Defence-in-Depth Concept - cyber.gc.ca</p><figure id="f51405fd-f5d6-44e5-b12b-2b4157200458" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-cae9f1d2c55ad799d8f148ad507bede543dbeb4b%252Fitsp50104-Fig3.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=2e83db21&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-cae9f1d2c55ad799d8f148ad507bede543dbeb4b%252Fitsp50104-Fig3.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=2e83db21&amp;sv=1"/></a></figure><blockquote id="deaf383e-0e69-4959-aa9d-60e654665c01" class="">🔗 e.g. Google Cloud networking in depth</blockquote><p id="5472a891-bc25-4a3a-8c13-0651e86e6b33" class="">Overview of network security controls - GCP</p><figure id="c7782190-c7cc-463e-ac1a-a7ea307f8799" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-4cc2c2fa5ae0de040d5595a1ca9c3841f911c96f%252Fnetwork-security-controls-GCP.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7d2f6f44&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-4cc2c2fa5ae0de040d5595a1ca9c3841f911c96f%252Fnetwork-security-controls-GCP.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7d2f6f44&amp;sv=1"/></a></figure><h2 id="ecee7059-4c2d-40f3-8289-baa800b046f1" class=""><strong>Cloud Attacks</strong></h2><p id="428c20ea-41ae-4648-9c51-9d0d2c2a0b84" class="">Cloud platform attacks refer to security <strong>incidents</strong> and <strong>vulnerabilities</strong> that specifically <em>target cloud computing platforms</em>.</p><blockquote id="20583a18-bb20-46ce-98e9-e7797050a524" class="">🔗 Top 10 Cloud Attacks and What You Can Do About Them - aquasec.com</blockquote><p id="1074e487-0b65-4ff0-aec4-cf52f042b829" class="">Cloud Attacks - aquasec.com</p><figure id="44e75e58-6623-40eb-a490-aec604368830" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-6797cd8d88bd35f7fcec3256f621b160ee885576%252Fcloud-attacks.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=309ec60&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-6797cd8d88bd35f7fcec3256f621b160ee885576%252Fcloud-attacks.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=309ec60&amp;sv=1"/></a></figure><h3 id="afd48dbc-e159-40bf-bca1-5d6275b71556" class=""><strong>Attacks targets</strong></h3><ul id="16336dac-e0cc-40c4-b9bf-0761a3ebd458" class="bulleted-list"><li style="list-style-type:disc"><em>Identities</em> - SaaS, Cloud Platform, Data plane identities<ul id="7871ab68-ae8f-4b0c-8cbe-e25997dcd8f8" class="bulleted-list"><li style="list-style-type:circle"><code>e.g.</code> - administrator Azure <strong>AD</strong> credentials/identities</li></ul></li></ul><ul id="d7f2f8d6-4265-4893-9608-c2f2d5d35e0c" class="bulleted-list"><li style="list-style-type:disc"><em>Data</em><ul id="0223e004-dfff-43bc-af92-0fdaa7e1d758" class="bulleted-list"><li style="list-style-type:circle"><code>e.g.</code> - AWS S3 <strong>bucket</strong>, or relational/non-relational data</li></ul></li></ul><ul id="dabe94e6-359f-4213-a8ac-a50e87dfaa7a" class="bulleted-list"><li style="list-style-type:disc"><em>Services</em> - SaaS, Control plane services, Compute instance<ul id="fd3c8259-4e10-4377-b84e-b11cab56d297" class="bulleted-list"><li style="list-style-type:circle"><code>e.g.</code> - emails, automation (API), EC2</li></ul></li></ul><h3 id="ddddc699-8d87-4fa0-8d76-43dd618012eb" class=""><strong>Attack Methods</strong></h3><ul id="13d21d14-48b0-402a-99d2-25732ed57b78" class="bulleted-list"><li style="list-style-type:disc"><em>Misconfiguration</em> - intentional or unintentional<ul id="cb9f9aa5-88bd-4151-b194-6ca59a837db7" class="bulleted-list"><li style="list-style-type:circle"><code>e.g.</code> - Publicly available data stores or services (DBs, public API, etc)</li></ul></li></ul><ul id="b1cd1733-d4cd-4443-9aa1-7c9c018ed3b6" class="bulleted-list"><li style="list-style-type:disc"><em>Account hijacking</em><ul id="41fa06ed-c9ae-43e4-a99d-b01a44f7ece0" class="bulleted-list"><li style="list-style-type:circle"><code>e.g.</code> - Brute force, Password spraying, <a href="https://www.cloudflare.com/learning/bots/what-is-credential-stuffing/">Credentials stuffing</a></li></ul></li></ul><ul id="49bc17d5-b3d0-4b9d-a982-0ab6d155d0db" class="bulleted-list"><li style="list-style-type:disc"><em>Service hijacking</em><ul id="9871eb56-5287-4ff1-9162-03f6142d4346" class="bulleted-list"><li style="list-style-type:circle"><code>e.g.</code> - Insecure API Keys</li></ul></li></ul><ul id="319bd7dd-c646-4c45-a135-41d54f487549" class="bulleted-list"><li style="list-style-type:disc"><em>Malware injection</em><ul id="0d322daf-7a80-4554-99df-2d13f622ddca" class="bulleted-list"><li style="list-style-type:circle"><code>e.g.</code> - compromised web app, API compromised bad code, infected VM, code repositories (open-source libraries)</li></ul></li></ul><h2 id="01b09d2a-73ec-4f7d-b269-cbf64d9cb930" class=""><strong>IAM &amp; Identity Protection</strong></h2><h3 id="b5950b4f-d7f3-4d64-898c-736f4c2a5dbb" class=""><strong>Sources</strong></h3><p id="3c5dfe65-b30c-4db3-a206-a176b67a95fa" class="">Providers naming: <strong>AWS/GCP IAM</strong>, <strong>Azure AD</strong></p><ul id="261668ef-383b-410f-80a9-f3171186f6b6" class="bulleted-list"><li style="list-style-type:disc"><em>Users</em> - Cloud User, Guest User, External/Hybrid User (<em>Federated Systems</em>)<ul id="7b52bebe-562d-4daf-b5ba-d6fcfb9c5f66" class="bulleted-list"><li style="list-style-type:circle">minimize privileged <code>admin</code>/<code>root</code> (cloud subscription account) user access</li></ul><ul id="b6611f50-5433-4520-bdf8-0be701c8cf1b" class="bulleted-list"><li style="list-style-type:circle">create groups and use <strong>dynamic management</strong></li></ul><ul id="8fbe7fdf-fa52-4c6e-84d2-2f6e5d8196b9" class="bulleted-list"><li style="list-style-type:circle">security assessments and <strong>auditing</strong> user configuration</li></ul><ul id="e04c05f0-7b54-477e-a70b-079fd9b24c3b" class="bulleted-list"><li style="list-style-type:circle">apply <em><strong>least required rights</strong></em> concept (<a href="https://www.crowdstrike.com/cybersecurity-101/principle-of-least-privilege-polp/">POLP</a>)</li></ul></li></ul><ul id="e421e754-91b8-4714-92be-9a2c85592569" class="bulleted-list"><li style="list-style-type:disc"><em>Resources</em><ul id="1f641038-0745-4f36-9434-8a638c4fcd7f" class="bulleted-list"><li style="list-style-type:circle">apply least privileges and <strong>audit</strong> resource access &amp; review</li></ul><ul id="ad7f4557-631a-4ba2-9e8b-8a3414ad7d14" class="bulleted-list"><li style="list-style-type:circle">use dynamic access policies</li></ul><ul id="809c2be3-34c2-46f6-a06f-d645991d9003" class="bulleted-list"><li style="list-style-type:circle"><strong>separate control plane and data plane access</strong></li></ul></li></ul><p id="603f013b-9ce8-49a5-a665-65296cbffca8" class=""><code>e.g.</code> It can be useful to organize user identities into a flow like this:</p><p id="b218d5fb-e0f6-4367-b350-25248c6df899" class="">User identity/credentials (Access management)</p><p id="afe7c2da-c640-4ab2-b73b-39d748ab8ec6" class="">⬇️</p><p id="8b3f3dd0-51be-4b17-8ca2-6bf489c42ad4" class="">Group</p><p id="66838eb3-b901-45c1-bd5f-07cc2a525ae9" class="">⬇️</p><p id="dbcf4c4a-89fe-403e-9b26-05c42d6cc2d5" class="">Role</p><p id="9471c2c4-637d-42c0-b49b-926e6bd2e198" class="">⬇️</p><p id="8e6c3569-ba7f-47a5-bd82-9b14e7c0c13c" class="">Resource</p><p id="a7b5c118-b162-4b17-b6f9-680140ac1628" class="">Azure AD User</p><figure id="84311268-78f1-4eb6-b1cb-35f2216208d2" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-bcb06facb4f30cb0be257cc2118651719f7729ec%252Fimage-20230530230320832.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d52d741a&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-bcb06facb4f30cb0be257cc2118651719f7729ec%252Fimage-20230530230320832.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d52d741a&amp;sv=1"/></a></figure><blockquote id="d9e662b4-8ee7-4064-97ac-332f4ef2ff04" class="">📌 CSPs Identity Management<p id="04b8e366-8ff5-4184-80ad-3c2a51296c96" class="">🔗 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html">AWS IAM Identities</a></p><ul id="2768faf7-3a5b-43c9-97cf-8f8c7687bf1a" class="bulleted-list"><li style="list-style-type:disc">Users, Roles, Policies</li></ul><p id="bd041a34-51e6-4386-a92b-54fa5576eb0b" class="">🔗 <a href="https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis">Azure AD</a></p><ul id="994008f5-d259-427d-8c74-96efb791c29a" class="bulleted-list"><li style="list-style-type:disc">Users, Service Principals, Managed Identities, Roles</li></ul><p id="addfa60e-5c99-4a6b-9c75-6047f796540e" class="">🔗 <a href="https://cloud.google.com/iam/docs/overview">Google Cloud IAM</a></p><ul id="426f311a-b560-4860-934c-8fd95903e6f0" class="bulleted-list"><li style="list-style-type:disc">Google Account, Service Account, Role, Policy</li></ul></blockquote><p id="f67b54a4-7448-4d28-8749-c90599a21d26" class="">All the CSPs have identity protection services like</p><ul id="1366dd1e-e60b-4080-8cc6-ec6b73ca8a65" class="bulleted-list"><li style="list-style-type:disc">AWS CloudTrail, Trusted Advisor</li></ul><ul id="0844a478-9e67-4e17-b46b-acd9e7d8f04e" class="bulleted-list"><li style="list-style-type:disc">Azure Identity Protection and AD Logs</li></ul><ul id="79062abe-7dc5-455f-bd58-2633891f522b" class="bulleted-list"><li style="list-style-type:disc">Google Cloud Identity, Advanced Protection Program, Security Key</li></ul><h3 id="0aab92e7-79cc-4b78-8ac9-f881ed48c39f" class=""><strong>Vulnerabilities</strong></h3><p id="d14a2d02-1b93-45a6-b45d-b7a359f0cee8" class=""><code>e.g.</code> Account &amp; Login vulnerabilities:</p><ul id="a2320821-0ff6-4448-b174-15351bae1705" class="bulleted-list"><li style="list-style-type:disc">weak passwords, leaked credentials, threat intelligence</li></ul><ul id="5afd3cea-51fd-453f-820b-9e843b097ed1" class="bulleted-list"><li style="list-style-type:disc">location/IP anomalies, password spraying, brute force attacks</li></ul><p id="17097f86-5e9a-498b-b381-4e8d6a7e1003" class="">📌 Best practices for accessing and managing cloud resources and users:</p><ul id="cfa501f5-d879-4618-9510-0edad2bc203a" class="bulleted-list"><li style="list-style-type:disc">use strong authentication (<strong>MFA</strong>) &amp; enforce strong <strong>password policies</strong></li></ul><ul id="90415e5e-3346-4c74-abcb-dc1292dbfa20" class="bulleted-list"><li style="list-style-type:disc">implement <strong>role-based/conditional access</strong> control</li></ul><ul id="47aacca2-8acd-40ed-9662-3cef56ed9754" class="bulleted-list"><li style="list-style-type:disc"><strong>monitor</strong> user activities &amp; review user permissions/config</li></ul><ul id="7876ad5c-7f63-4b7a-aa71-e1779caea8ed" class="bulleted-list"><li style="list-style-type:disc">use secure connection protocols &amp; data encryption</li></ul><ul id="38e78261-ea33-4278-84b6-dbe92f0dc5fe" class="bulleted-list"><li style="list-style-type:disc">implement network segmentation</li></ul><ul id="920e027f-ecd6-4ca5-8698-f64c6188b8e2" class="bulleted-list"><li style="list-style-type:disc">regular systems patching &amp; users training</li></ul><ul id="c120e383-f014-407c-838a-3834aca1b5ab" class="bulleted-list"><li style="list-style-type:disc"><strong>audit</strong> unused accounts</li></ul><h3 id="9a72c848-5f36-4bd3-93a6-bc228d54fefd" class=""><strong>Response</strong></h3><ol type="1" id="822cc277-8bbe-4c46-b782-e78a4ec351b2" class="numbered-list" start="1"><li><strong>Revoke</strong> the permissions for the compromised identity and isolate it</li></ol><ol type="1" id="ae907616-1d71-4236-acc8-690dfcaa6534" class="numbered-list" start="2"><li><strong>Reset</strong> identities (session tokens, API &amp; access keys)</li></ol><ol type="1" id="cb8593e0-a946-4326-be8c-e790eb5d16a9" class="numbered-list" start="3"><li><strong>Review</strong> what happened and determine impact with IT and business colleagues</li></ol><ol type="1" id="9aec00db-c460-4102-b3a3-c972e3467b60" class="numbered-list" start="4"><li><strong>Remediate</strong> and fix it, improve processes and plan of action, report</li></ol><ol type="1" id="742b4ef0-6961-487e-9ddf-3be27fb5fe69" class="numbered-list" start="5"><li><strong>Return</strong> to operating state and monitor</li></ol><h2 id="fbfc7adf-4d8e-471d-90b3-8d27bf13a79f" class=""><strong>Resource Protection</strong></h2><h3 id="7afb7af9-7ceb-4422-bdd8-ef80916a449d" class=""><strong>Data</strong></h3><p id="b05e8094-cb89-44d4-b6b5-4304f721ae3d" class="">There are many types of cloud data like</p><ul id="4219bdd7-648f-4d55-907f-fdc17c65c87d" class="bulleted-list"><li style="list-style-type:disc">files, relational/non-relational databases (managed, proprietary, IaaS), big data, sensitive data</li></ul><p id="1a509820-9e03-4c29-a3db-bb3a1e138970" class="">Protecting <strong>cloud data at rest</strong> involves implementing mechanisms to ensure the confidentiality, integrity and availability of data even when it is not actively being accessed or transmitted.</p><ul id="cb882e6f-0b0f-4fe4-900c-e8b5e745e7b4" class="bulleted-list"><li style="list-style-type:disc">network controls and permissions</li></ul><ul id="9d8772b8-c76e-4ac1-8fae-d952b7898fa4" class="bulleted-list"><li style="list-style-type:disc">encryption, hardware security module</li></ul><ul id="9c78e1a5-fc7e-4984-89bc-fd19e3d2a293" class="bulleted-list"><li style="list-style-type:disc">backup, replication</li></ul><p id="60860bfc-c80b-4b38-bc2e-a11753fb1b19" class="">Protecting <strong>cloud data in transit</strong> involves security measures and protocols to safeguard data transmitted across networks.</p><ul id="84f95eaa-e229-4d51-a241-39688409cf6f" class="bulleted-list"><li style="list-style-type:disc">encryption (always) through secure communication protocols</li></ul><ul id="53d0a185-cfa3-4432-963b-d6cf99ff4b29" class="bulleted-list"><li style="list-style-type:disc">Hardware security modules (<code>HSM</code>)</li></ul><p id="64483a26-6857-4391-97ac-e3f9f5f26d0e" class="">📌 Best practices for cloud data protection:</p><ul id="185621ef-0dc0-40a9-9256-885d561f8577" class="bulleted-list"><li style="list-style-type:disc">Access controls - limit access to resource, data, network</li></ul><ul id="b0d31277-ce56-452d-a23b-308339d77071" class="bulleted-list"><li style="list-style-type:disc">Encryption - at rest, in transit, end-to-end</li></ul><ul id="e3887ace-c705-466c-80d6-5e7ef131ee57" class="bulleted-list"><li style="list-style-type:disc">Backup and Recovery</li></ul><ul id="a9da6910-e9d6-410d-ae9e-45332251830a" class="bulleted-list"><li style="list-style-type:disc">Regular security Audits and assessments</li></ul><blockquote id="587839f5-fa87-4396-9ffd-76caa22acf0d" class="">🔗 GCP Data Encryption options<p id="a9a05a45-6ef8-4aad-8dff-954c235426ab" class="">🔗 <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html">AWS Data Encryption</a></p><p id="ba8d575f-6fa9-4b5d-8dfc-79908a3058ac" class="">🔗 <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption">Azure Storage service-side encryption</a></p></blockquote><h3 id="58fdcc98-fa94-47eb-8c33-bf9c66e7f3c9" class=""><strong>Network</strong></h3><p id="2cbbc29c-3a89-4d07-b939-7373e783f767" class="">The cloud provider ensures network and (virtualized and physical) infrastructure protection through DDoS protection and general threat protection.</p><p id="467bfc19-9433-430f-95e0-34752edb9a13" class="">The physical connection between the cloud resources of one customer and those of another is handled by the cloud vendor. The customer is responsible for the physical network between their cloud resources.</p><p id="a960f259-00d3-498b-8f77-c8ef224cce6f" class="">At tenant level, there are some layers to protect and that the customer is responsible for, such as:</p><ul id="a1f6c623-891c-4180-87a4-887c3ae34880" class="bulleted-list"><li style="list-style-type:disc"><a href="https://aws.amazon.com/products/security/network-application-protection/">AWS VPC</a><ul id="a14f46d4-3d71-4001-9ed5-543be016f654" class="bulleted-list"><li style="list-style-type:circle">Network ACL - Subnet level</li></ul><ul id="bc48f383-feca-4256-8471-247202321c04" class="bulleted-list"><li style="list-style-type:circle">Security Group - EC2 level</li></ul><ul id="70582e9a-9fc2-417c-a1c0-dd5b074e3078" class="bulleted-list"><li style="list-style-type:circle"><a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html">PrivateLink</a> - establish private connectivity between Virtual Private Clouds and supported services.</li></ul></li></ul><ul id="acad0423-1cfc-429f-8975-1b9ac26b67a3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://azure.microsoft.com/en-us/solutions/network-security">Azure Network Security</a><ul id="bfdafdca-c040-4404-9eb7-0725afda5513" class="bulleted-list"><li style="list-style-type:circle">Network Security Group - Subnet &amp; Instance level</li></ul><ul id="4a3ef420-f8ac-4be8-9181-0860c386c1db" class="bulleted-list"><li style="list-style-type:circle"><a href="https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview">Private Endpoint</a></li></ul></li></ul><ul id="e1e05da2-b1a5-4695-8ccb-2796d84c7779" class="bulleted-list"><li style="list-style-type:disc"><a href="https://cloud.google.com/learn/what-is-cloud-network-security">Google Cloud Network Security</a><ul id="f6bc15f6-1efa-4927-84f2-85852fd6f072" class="bulleted-list"><li style="list-style-type:circle">Firewall Rule - VPC, Subnet, VM Level</li></ul><ul id="8c918a23-ff7a-425f-981d-361f29c81731" class="bulleted-list"><li style="list-style-type:circle"><a href="https://cloud.google.com/vpc-service-controls">VPC Service Controls</a></li></ul></li></ul><p id="5d72a933-de17-44b7-9107-fcbb0e9f32ea" class="">Additional network security services:</p><ul id="a9b8523f-00b8-4c52-bf0d-b140797c4d7a" class="bulleted-list"><li style="list-style-type:disc"><em>AWS</em> - Shield, Web Application Firewall (WAF), GuardDuty</li></ul><ul id="ee3a8783-89a3-4222-8988-c7209da23098" class="bulleted-list"><li style="list-style-type:disc"><em>Azure</em> - Firewall, App Gateway, FrontDoor</li></ul><ul id="1479ceee-de19-406e-b04c-c265f9b75243" class="bulleted-list"><li style="list-style-type:disc"><em>Google</em> - Cloud Armor</li></ul><p id="1dfbe9dc-4761-4163-802d-a98ecf452b6b" class="">📌 Best practices for cloud network protection:</p><ul id="b4643792-c104-4790-a52a-236c8e2b1147" class="bulleted-list"><li style="list-style-type:disc">leverage cloud provider tools and limit <strong>public</strong> attack surface<ul id="0715b7a2-ffda-45b8-80b9-1cc58ba33c4f" class="bulleted-list"><li style="list-style-type:circle">check firewall rules and don&#x27;t open ports globally</li></ul></li></ul><ul id="a10091e6-2de5-4d3d-8d8e-fdb3573cc201" class="bulleted-list"><li style="list-style-type:disc">monitor, setup alerts for abnormal usage and have a playbook for this kind of activity</li></ul><h3 id="252de903-5d10-4b03-91a7-34d38d2d1b48" class=""><strong>Compute</strong></h3><p id="a42709a0-a887-42d4-981b-ab3494ed948c" class=""><strong>Infrastructure compute protection</strong> involves</p><ul id="cea7f5c2-851f-4a94-8c79-92d6243bbca8" class="bulleted-list"><li style="list-style-type:disc"><em>patch management</em><ul id="402d554f-4206-4084-a838-baecafcf3022" class="bulleted-list"><li style="list-style-type:circle">IaaS - automated OS patching (AWS, Azure) &amp; service</li></ul></li></ul><ul id="2935601d-98d9-4513-904f-fe5688653e45" class="bulleted-list"><li style="list-style-type:disc"><em>resource protection</em></li></ul><ul id="e42fafe6-8218-47b4-8329-ddaa59eaadff" class="bulleted-list"><li style="list-style-type:disc"><em>OS hardening</em> (run only required services, with most secure settings)</li></ul><ul id="67e12725-81da-4112-9ea9-c354059a04bc" class="bulleted-list"><li style="list-style-type:disc"><em>monitoring</em> (logs)</li></ul><ul id="8536d2c4-65cd-430e-bff1-23ef012e0554" class="bulleted-list"><li style="list-style-type:disc"><em>attack surface minimization</em> (block ports).</li></ul><ul id="0ff95049-bd4a-437a-b372-bd035f3cf4c4" class="bulleted-list"><li style="list-style-type:disc"><em>availability</em> (multiple instances)</li></ul><p id="fdf1aecc-58b0-4e13-91a8-265c6d0619c0" class=""><strong>Platform compute protection</strong> involves the cloud provider to secure the services and operating system of the running application</p><ul id="12ac949b-54b1-4cea-8472-0370d6863907" class="bulleted-list"><li style="list-style-type:disc">custom options can also be set up by the customer</li></ul><ul id="f83851a9-269d-46e6-9e3a-ba7bce7a10f1" class="bulleted-list"><li style="list-style-type:disc">PaaS - always patched by the CSP</li></ul><p id="5320fe44-c1bf-45cb-997f-c9838ae3c172" class=""><strong>Confidential computing</strong> enables the execution of workloads while <em>keeping the data and code confidential</em>, protecting them from the cloud service provider, other tenants and potential attackers, unauthorized data access, inside a trusted isolated execution environment (application <strong>enclave</strong>).</p><ul id="e4729cd5-4112-432f-8542-2630f16b0d18" class="bulleted-list"><li style="list-style-type:disc">Confidential compute requires specific compute instance sizes and hardware</li></ul><blockquote id="d2af724d-78e1-44cf-ba68-490291a48bb2" class="">🔗 Azure Confidential Computing<ul id="86fad095-3577-400e-88b1-031bfd3910fe" class="bulleted-list"><li style="list-style-type:disc"><code>e.g.</code> <a href="https://learn.microsoft.com/en-us/azure/architecture/example-scenario/confidential/healthcare-inference#architecture">Azure - Confidential computing on a healthcare platform</a></li></ul></blockquote><p id="1d496e4f-9296-467d-bd78-887022dd5857" class=""><strong>Monitoring</strong> is a built-in feature into the cloud platform.</p><ul id="f269e2b0-c133-4836-842a-032dd7bf24f8" class="bulleted-list"><li style="list-style-type:disc">3rd party agent monitoring can also be used</li></ul><blockquote id="6d3231b5-39a2-45d6-b8c1-ced62c600df4" class="">🔗 Azure Monitoring</blockquote><p id="b366ba98-2a48-4b5c-af6d-9a33730fd381" class="">Azure Monitor</p><figure id="ac03b931-3541-44ac-b982-a28f8b25c0f2" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-96ea11ec04dafa8922660065d239d3ee3147c965%252Fazure-monitor.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7ca7d254&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-96ea11ec04dafa8922660065d239d3ee3147c965%252Fazure-monitor.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7ca7d254&amp;sv=1"/></a></figure><h3 id="b29a6767-e8dc-4f42-af70-4e861fd56bd7" class=""><strong>Compliance</strong></h3><p id="b21505de-0a19-425d-b0b4-0d8bc5bb36bc" class=""><strong>Cloud Regulatory Compliance</strong> refers to the adherence to specific laws, regulations and industry standards that govern the protection, privacy and security of data and systems within the cloud computing environment. <em>Organizations that operate in regulated industries or handle sensitive data are required to comply with various legal and industry-specific requirements and frameworks</em>.</p><p id="aafeca8d-819c-4c3c-9d65-891666be8c9c" class="">Key aspects:</p><ul id="081e184e-bb09-4635-a59c-77a588971b02" class="bulleted-list"><li style="list-style-type:disc">data protection regulations (GDPR, CCPA, HIPAA)</li></ul><ul id="9b7195fa-fbf3-47c1-98e0-03c9ceae2111" class="bulleted-list"><li style="list-style-type:disc">security standards (PCI DSS, ISO 27001, NIST CyberSec framework</li></ul><ul id="d4d19667-18f2-47bd-9230-92f0a709e64a" class="bulleted-list"><li style="list-style-type:disc">data residency and vendor due diligence</li></ul><ul id="fbe5f5d6-1410-44f4-bbe7-b76b556f634a" class="bulleted-list"><li style="list-style-type:disc">audit and reporting</li></ul><ul id="866cf744-6194-4808-a651-59ee3ec05307" class="bulleted-list"><li style="list-style-type:disc">incident response</li></ul><ul id="40a859bb-a617-4d5a-929f-fbefb1b2e89e" class="bulleted-list"><li style="list-style-type:disc">data backup and retention</li></ul><p id="781dd048-6b33-408b-9427-fe34b1348a32" class=""><strong>CSP Regulatory Support</strong></p><blockquote id="cebdad2a-741a-401a-a46b-bc95e975e0ea" class="">📌 Tools<ul id="270588a1-42f2-4f32-8155-981dd1657303" class="bulleted-list"><li style="list-style-type:disc">🔗 <strong><a href="https://www.amazonaws.cn/en/guardduty/">Amazon</a></strong><a href="https://www.amazonaws.cn/en/guardduty/"> GuardDuty</a></li></ul><ul id="1b1814b4-06e8-439d-a337-6da0c865b5e5" class="bulleted-list"><li style="list-style-type:disc">🔗 <strong><a href="https://learn.microsoft.com/en-us/microsoft-365/compliance/compliance-manager">Azure</a></strong><a href="https://learn.microsoft.com/en-us/microsoft-365/compliance/compliance-manager"> Compliance Manager</a></li></ul><ul id="c8732d2a-9f91-4a81-9c8c-55c10141502d" class="bulleted-list"><li style="list-style-type:disc">🔗 <strong><a href="https://cloud.google.com/security-command-center">GCP</a></strong><a href="https://cloud.google.com/security-command-center"> Security Command Center</a></li></ul><p id="84a19f61-2be6-4770-956b-64d85eaf3b42" class="">📌 Documentation</p><ul id="2bfae930-21f4-40bc-a92d-e14b1d31179f" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://aws.amazon.com/artifact/">AWS Artifact</a></li></ul><ul id="92b788de-d8f2-419e-a964-f9d34e7ab847" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://www.microsoft.com/en-us/trust-center/product-overview">Microsoft Trust Center</a></li></ul><ul id="b800977f-c604-4abe-bd46-a2f6d7c3b8de" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://cloud.google.com/security/compliance">GCP Compliance Resource Center</a></li></ul></blockquote><p id="b4314a7c-2dea-4e97-a0ee-f8835ca5a221" class=""><strong>Tenant Responsibilities</strong></p><p id="ef494dfb-f51b-43f7-95f2-78ce15394e22" class="">Since the customer is responsible for cloud services compliance, he should</p><ul id="6862353c-2a8c-4d53-9b59-4fe95aae5340" class="bulleted-list"><li style="list-style-type:disc">understand customer compliance requirements and document provider compliance with regulations</li></ul><ul id="0394b5dc-6a90-4917-8135-c2f73d43ec7a" class="bulleted-list"><li style="list-style-type:disc">implement customer responsibilities</li></ul><ul id="249af4ae-f0a1-4aca-80f4-ca751aed6acf" class="bulleted-list"><li style="list-style-type:disc">use provider tools to maintain compliance</li></ul><p id="61657edf-7d5a-43fb-ba3b-4b3897990541" class=""><strong>Common Protected Data</strong></p><p id="81ef6e9e-a7b8-4d86-8da7-d9f7fcb495e5" class="">Protected data refers to sensitive information that requires special safeguards and security measures to <em>ensure its confidentiality, integrity and availability.</em></p><ul id="e360af5c-dd10-4abf-82cb-5585c49cd56a" class="bulleted-list"><li style="list-style-type:disc"><strong>PII</strong> (Personally Identifiable Information) - individual data</li></ul><ul id="ae964a6c-56f2-4363-8f07-2c89b50dfb36" class="bulleted-list"><li style="list-style-type:disc"><strong>PHI</strong> (Protected Health Information) - healthcare<ul id="36e03910-23df-4d50-8033-2b691e74f4bd" class="bulleted-list"><li style="list-style-type:circle">HIPAA (<a href="https://www.hhs.gov/hipaa/index.html">Health Insurance Portability and Accountability Act</a>)</li></ul></li></ul><ul id="ca1a1c47-7009-44d1-8002-3c3029489052" class="bulleted-list"><li style="list-style-type:disc">Financial Data - sensitive banking information (PII, PCI-DSS)</li></ul><ul id="4f97edce-136c-41c0-8a73-b90095a325d1" class="bulleted-list"><li style="list-style-type:disc"><strong>IP</strong> (Intellectual Property) - inventions, patents, copyrights, business plans</li></ul><ul id="86ab6300-5ea7-4af3-8ba2-7aa58f182c54" class="bulleted-list"><li style="list-style-type:disc">Legal &amp; Compliance Data</li></ul><ul id="f708c7be-7316-4000-adba-315325e4fdab" class="bulleted-list"><li style="list-style-type:disc">Confidential Business Data &amp; business reputation</li></ul><ul id="a54dc142-ce7a-4d6d-bd5a-8f976eb9ce9b" class="bulleted-list"><li style="list-style-type:disc">Regional Considerations<ul id="53c4a4ed-1710-4d7f-999f-ecd3e10cfc24" class="bulleted-list"><li style="list-style-type:circle">GDPR-EU (<a href="https://gdpr.eu/">General Data Protection Regulation</a>)</li></ul><ul id="76a4b826-ad21-4337-b9c0-428099edd344" class="bulleted-list"><li style="list-style-type:circle">CCPA (<a href="https://oag.ca.gov/privacy/ccpa">California Consumer Privacy Act</a>)</li></ul><ul id="a1a1b85a-5130-4c37-9e62-6621d6901f31" class="bulleted-list"><li style="list-style-type:circle">etc</li></ul></li></ul><blockquote id="123dcb7a-3093-4357-a04e-ece7c665da47" class="">🔗 HIPAA Reference Architecture on AWS<ul id="a177652b-1e2b-4a4e-83e0-4220ad206363" class="bulleted-list"><li style="list-style-type:disc"><a href="https://aws.amazon.com/compliance/hipaa-compliance/">AWS HIPAA</a><ul id="d412e498-072f-4c31-912c-f4f42432fcd7" class="bulleted-list"><li style="list-style-type:circle">Under the HIPAA regulations, cloud service providers (CSPs) such as AWS are considered <em>business associates</em></li></ul></li></ul><p id="9b8d6479-7eb1-41e9-98cd-cf13f90d20c5" class="">🔗 <a href="https://cloud.google.com/security/compliance/hipaa-compliance">Google Cloud HIPAA - Compliance</a></p></blockquote><p id="beb22f60-a668-410c-9845-488d6bef2277" class="">HIPAA Reference Architecture on AWS</p><figure id="5dd8673b-f019-4a5e-b461-e20f9de89feb" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9af56445fc05946c8d882998d68f4135f6669b22%252Fhipaa-compliance-architecture-diagram-aws.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=70f58f27&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9af56445fc05946c8d882998d68f4135f6669b22%252Fhipaa-compliance-architecture-diagram-aws.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=70f58f27&amp;sv=1"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cloud Management Concepts</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b0553e61-f917-4618-8507-d2ea19f2bb0b" class="page mono"><header><h1 class="page-title"><strong>Cloud Management Concepts</strong></h1><p class="page-description"></p></header><div class="page-body"><blockquote id="ca6d4b71-64b8-45ed-9faf-1e11e2482e13" class="">📕 Learning Objectives<ul id="73d0d2e9-e308-455c-87e1-e4cf0d644a90" class="bulleted-list"><li style="list-style-type:disc">Basics aspects of managing cloud <strong>resources</strong> and related tasks</li></ul><ul id="3ffe0762-db29-4a12-999e-5ae9ae9e26d0" class="bulleted-list"><li style="list-style-type:disc">Cloud <strong>access control</strong> fundamentals</li></ul></blockquote><h2 id="71a65d51-4074-43dd-bbbb-298739801eee" class=""><strong>Management Foundations</strong></h2><p id="8261db69-8d6a-4713-9177-382c26130f4e" class=""><a href="https://www.crowdstrike.com/cybersecurity-101/cloud-security/shared-responsibility-model/">Cloud </a><strong><a href="https://www.crowdstrike.com/cybersecurity-101/cloud-security/shared-responsibility-model/">shared responsibility</a></strong> refers to the distribution of security and management responsibilities between cloud service providers and cloud customers. Both the CSP and the customer have distinct roles and responsibilities to ensure the security, availability and proper management of the cloud environment and its resources.</p><p id="636e7d31-95d6-4780-aacd-3e3968f5a65e" class="">Defending the Whole, IaaS, PaaS, and SaaS from Mark Nunnikhoven</p><figure id="23891019-737d-43b2-800a-1e1b63e7b4b2" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-212d48ee08dcfee819d9990b345e343d70f6e948%252Fimage-20230527114523623.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=14557a9d&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-212d48ee08dcfee819d9990b345e343d70f6e948%252Fimage-20230527114523623.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=14557a9d&amp;sv=1"/></a></figure><h3 id="4f830c22-5c85-459a-8913-ded1a9b8e8ed" class=""><strong>Management Responsibility</strong></h3><p id="4147e013-06c9-47d0-9d1d-dc4bb1621a6f" class="">The <strong>CSP</strong> will <em>always be responsible for the physical facility and infrastructure, virtualization and cloud management plane</em>.</p><p id="31cbad82-cf09-458d-b1df-a08fab2b6eff" class="">The <strong>customer</strong> is <em>always responsible for identities and subscription access</em>.</p><ul id="edb92e5b-86ef-4178-9cb0-47379a7f06c2" class="bulleted-list"><li style="list-style-type:disc"><code>Customer Responsibility e.g.</code><ul id="7d71958a-c99b-41d7-85f2-affba2c7003a" class="bulleted-list"><li style="list-style-type:circle">IaaS: <em>Virtual machine</em> (O.S.), <em>Services</em>, <em>Workload</em> (Application, Data, Service configuration)</li></ul><ul id="dc733003-e086-4917-848f-8a3cf2eff759" class="bulleted-list"><li style="list-style-type:circle">PaaS: <em>Workload</em> (Application, Data, Service configuration)</li></ul><ul id="4db77f37-18b2-4785-a0f2-b8c25abb1517" class="bulleted-list"><li style="list-style-type:circle">SaaS: <em>Customizations</em> (Data, Service configuration, Usage, Identity, Access, Good practices &amp; Compliance)</li></ul></li></ul><h3 id="c645d13a-110a-4ab4-b931-0b7260fcf204" class=""><strong>Security Responsibility</strong></h3><p id="6ebad768-5442-4ab6-8607-7091da5ed1e3" class="">CSP is responsible for</p><ul id="6e3989eb-51a6-4110-9f5b-62ffeeedd9e6" class="bulleted-list"><li style="list-style-type:disc">Physical, Infrastructure, Platform security</li></ul><ul id="1793100c-1bc7-4d43-b83d-af11105c2ddf" class="bulleted-list"><li style="list-style-type:disc">Identity system security</li></ul><ul id="d01ec8c1-285a-49e4-bcbf-5eeea9dd99d1" class="bulleted-list"><li style="list-style-type:disc"><em><strong>Standards compliance</strong></em></li></ul><p id="0ade1c57-7c5b-4ee3-9007-8427d8fc46e2" class="">The customer is responsible for</p><ul id="4fe7f721-2544-4928-bd79-8041ce65d5fe" class="bulleted-list"><li style="list-style-type:disc">Identity, Data, Application security (good practices)</li></ul><ul id="9102f17d-9008-4a19-8ebf-493d8ef325d2" class="bulleted-list"><li style="list-style-type:disc"><em><strong>Standards compliance</strong></em></li></ul><p id="22075462-5c9d-4408-8a7a-0530ed8d7e27" class="">AWS responsibility &quot;Security of the Cloud&quot;</p><figure id="f20a461d-1969-42b0-b7ce-eebd30044903" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8b4083cbba05ef87ad6494a4b74009ee164ca514%252FShared-Responsibility-Model-aws.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7ea49ec6&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8b4083cbba05ef87ad6494a4b74009ee164ca514%252FShared-Responsibility-Model-aws.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7ea49ec6&amp;sv=1"/></a></figure><h3 id="4198d24d-5eef-43da-ab2f-ee51bf52b85b" class=""><strong>Resiliency Responsibility</strong></h3><p id="82b78728-b293-4259-9bf0-4e15310451cb" class="">CSP responsibility</p><ul id="91180789-4b72-4c3d-81e6-b029ddd101c6" class="bulleted-list"><li style="list-style-type:disc">Infrastructure <strong>Resiliency</strong>, Uptime service level agreement (SLAs)</li></ul><ul id="8942e8b7-340e-4458-908c-3e549aafedd1" class="bulleted-list"><li style="list-style-type:disc">Service <strong>Availability</strong>, Disaster Recovery</li></ul><p id="f7e19ef5-bffd-4587-91aa-6b134d485915" class="">Customer responsibility</p><ul id="f6c7ec10-2bb9-4470-bdda-10d04625ec96" class="bulleted-list"><li style="list-style-type:disc">Build resilient applications and integrate CSP built-in availability and resiliency</li></ul><ul id="0829eb6d-81f4-41f0-8768-98270b6a7245" class="bulleted-list"><li style="list-style-type:disc">Implement data backup, replication, business continuity planning</li></ul><blockquote id="ff91363f-0468-431c-87c7-ac076b93b6c6" class="">🔗 AWS Shared Responsibility Model for Resiliency</blockquote><h3 id="3feb7a05-cfda-47a6-9b34-020e58c57385" class=""><strong>Workload Responsibility</strong></h3><p id="1af08f7b-db21-4b1a-8641-3e609c029d9d" class=""><a href="https://www.cyberark.com/what-is/cloud-workload-security/">Workload responsibility</a> includes the tasks and considerations involved in deploying, configuring, monitoring and securing the specific applications, services and data that make up the workload.</p><p id="b2dc09f6-794a-480e-89dc-8b00f9ed27ae" class="">CSP is responsible for</p><ul id="40951cb9-a708-4c92-ad8a-f712b8f1b802" class="bulleted-list"><li style="list-style-type:disc">SaaS out-of-the-box workload failures (with no customization)</li></ul><p id="07a00bf6-76fa-4b68-8afe-0f11f2282608" class="">📌 <em>Effective software lifecycle management techniques are essential.</em></p><p id="c5be3d80-ff9f-4e04-92e1-93bc04483bf5" class="">The customer is responsible for</p><ul id="c286ed1e-8b46-41fe-9b0b-e80defe2828d" class="bulleted-list"><li style="list-style-type:disc">Workload configuration</li></ul><ul id="1dda195d-5936-4232-a472-91ad0ecfeb9a" class="bulleted-list"><li style="list-style-type:disc">App and Data security</li></ul><ul id="4d7a9857-53c3-4650-b96e-40f04bcecd91" class="bulleted-list"><li style="list-style-type:disc">Monitoring and Performance</li></ul><h2 id="e9144aaa-9975-4fb5-b70e-904b5166d801" class=""><strong>Resource Management</strong></h2><blockquote id="58419702-fd62-49c8-81cb-dec786a8dc3b" class="">🔗 Resource Management Models in Cloud Computing - geeksforgeeks.org</blockquote><p id="8f90f310-c416-46bf-b629-56d4ececb39e" class=""><strong>Control Plane</strong></p><ul id="02566257-89ec-4d59-ad84-5a7019077bf0" class="bulleted-list"><li style="list-style-type:disc">The cloud is controlled by the <strong>management plane</strong>, which relates to the management and control of cloud infrastructure and services.<ul id="bcc9e8e6-5fd4-4164-a17c-1004e3a214d3" class="bulleted-list"><li style="list-style-type:circle">Web-based console</li></ul><ul id="52308a24-a6a5-4e4a-b6b6-b3156d372ef6" class="bulleted-list"><li style="list-style-type:circle">REST APIs</li></ul><ul id="25ee87a3-1c96-4ab2-bcee-27f39f32a344" class="bulleted-list"><li style="list-style-type:circle">Command line tool</li></ul></li></ul><p id="a5169f38-95bc-42cb-b352-3966fb30df38" class=""><strong>Data Plane</strong></p><ul id="5fcedc70-df42-472a-8aab-ecbc90955fc7" class="bulleted-list"><li style="list-style-type:disc">The <strong>Data plane</strong> is the cloud workload<ul id="a2005d1a-7f13-4a31-b916-d6634042822e" class="bulleted-list"><li style="list-style-type:circle">VMs, Data, Applications, Services</li></ul></li></ul><p id="b926b1d1-72ae-4294-839e-7aa2e968b69f" class="">A workload, a custom application, needs <em><strong>maintaining</strong></em><em> of its resources like code base, data and security.</em></p><p id="aa35b398-c63f-49e7-af4e-d21ff92ac61d" class=""><strong>Monitoring</strong></p><ul id="d22e3c22-9b58-4c55-809f-f8a3ab538ed3" class="bulleted-list"><li style="list-style-type:disc">Provided built-in cloud tools to monitor spending, performance, automated alerting &amp; actions<ul id="94df334e-17ab-47b8-b19b-ff8f5a751a2e" class="bulleted-list"><li style="list-style-type:circle">Applications need monitoring</li></ul></li></ul><p id="0489b9fa-39e4-492b-a1f4-5fb960687a0b" class=""><strong>Change Management</strong> in the cloud refers to the process of effectively managing and controlling changes to cloud-based systems, services and infrastructure, by implementing procedures and policies to ensure change planning, testing, deployment and so on.</p><ul id="dfe64e6f-ee0d-46e8-b3cc-ade96082cd21" class="bulleted-list"><li style="list-style-type:disc">Governance is critical- relevant compliance requirements, industry regulations, and organizational policies</li></ul><ul id="1ab4cce8-66cb-47f1-afbf-9544957c580f" class="bulleted-list"><li style="list-style-type:disc">Documentation and tracking</li></ul><h3 id="c8a3653f-8f78-4a0d-a2fe-0e9f7dc964be" class=""><strong>AWS</strong></h3><ul id="f7acca31-dd4a-4c55-81df-06f047555f12" class="bulleted-list"><li style="list-style-type:disc">RDS - Create a database (Platform service) - Templates &amp; Settings<ul id="0d00780f-7d7f-461d-a6f9-fff2856f630c" class="bulleted-list"><li style="list-style-type:circle">Connectivity &amp; Security, Monitoring, Logs, Configuration, Maintenance</li></ul></li></ul><h3 id="370d37c5-6875-49d8-b232-3401e9bff071" class=""><strong>Azure</strong></h3><ul id="57df681d-e630-474e-811e-76404b5b9cee" class="bulleted-list"><li style="list-style-type:disc">Azure PowerShell script as a <a href="https://learn.microsoft.com/en-us/samples/browse/?expanded=azure&amp;products=azure-resource-manager">template</a> (template JSON files)</li></ul><h2 id="b671854c-edd0-48e9-b524-e9aa97e351f0" class=""><strong>Monitoring &amp; Alerts</strong></h2><p id="b80faf83-25f2-4ebb-b229-84ad749e1a9c" class="">Cloud <strong>monitoring</strong> is the process of observing, gathering and analyzing data from cloud-based applications, services and resources to guarantee their overall performance, availability, security and health.</p><p id="ed878c69-6326-4f81-ace0-18357feff80c" class="">It involves the use of monitoring tools, metrics and alerts to track and assess the behavior and state of various components within the cloud environment.</p><ul id="913b9a34-1bdd-465a-a346-c69affc75242" class="bulleted-list"><li style="list-style-type:disc">Resource Monitoring</li></ul><ul id="28e2b322-82a9-492e-a6b2-b024f78efbec" class="bulleted-list"><li style="list-style-type:disc">System Monitoring frameworks<ul id="ce87a558-9a48-48e5-8f13-3af35f86001e" class="bulleted-list"><li style="list-style-type:circle">🔗 <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/overview">Azure Monitor</a></li></ul><ul id="ed5262a8-c159-470d-a799-358112735f6e" class="bulleted-list"><li style="list-style-type:circle">🔗 <a href="https://aws.amazon.com/cloudwatch/">AWS CloudWatch</a></li></ul><ul id="7d27c6a0-ec05-4ade-aa7c-2977069f0888" class="bulleted-list"><li style="list-style-type:circle">🔗 <a href="https://cloud.google.com/monitoring">Google Cloud Monitoring</a></li></ul><ul id="1d3913cb-b4c4-4082-b23c-42e5856f733a" class="bulleted-list"><li style="list-style-type:circle"><em>Third parties</em>: <a href="https://www.splunk.com/en_us/solutions/cloud-monitoring.html?301=/en_us/it-operations/cloud-monitoring.html">Splunk</a>, <a href="https://www.paessler.com/cloud-monitoring">PRTG</a>, <a href="https://www.nagios.com/solutions/cloud-computing/">Nagios</a></li></ul></li></ul><p id="1f4f0141-ff6e-4566-ab21-42219e9a3d3b" class=""><strong>Proactive Resource Management</strong></p><ul id="b393387b-03dc-42e4-873e-e1b4babaab24" class="bulleted-list"><li style="list-style-type:disc">Cloud <strong>Automation</strong> &amp; Alerting</li></ul><h2 id="be42ade8-b2b6-4bef-8ceb-09ccc06a24e1" class=""><strong>Identity &amp; Access Management</strong></h2><p id="bb77fcbb-0b8c-41b3-bd0e-559ff32daca1" class="">Cloud <strong>I</strong>dentity and <strong>A</strong>ccess <strong>M</strong>anagement (<strong>IAM</strong>) refers to the set of practices, policies and tools used to manage user <strong>identities</strong>, control <strong>access</strong> to cloud resources and enforce <strong>security</strong> measures within a cloud computing environment.</p><ul id="2e521ab6-908d-4942-8a25-0a6837cbd2cc" class="bulleted-list"><li style="list-style-type:disc">management of user authentication, authorization, permissions</li></ul><p id="3442b355-4f8b-464e-bb89-186a06972f33" class="">❗ <strong>Root</strong> user - absolute full rights on everything</p><p id="2e5f49c9-cdf5-41b6-aed6-c54c6da32917" class=""><strong>Federated</strong> user - authenticated and authorized to access resources in a system or application through a trusted external identity provider.</p><blockquote id="817abac3-33e7-4cb6-b133-0ff018996a29" class="">🔗 Google IAM<ul id="45cd9c42-4177-4fe5-848c-84511954d53c" class="bulleted-list"><li style="list-style-type:disc">Users, Groups, Roles, Policies</li></ul><ul id="5d601d8e-f1f4-4ecd-8940-317929632000" class="bulleted-list"><li style="list-style-type:disc">Federated Users</li></ul><ul id="a4b63ea9-e67a-4c42-926a-8ac963c8aad0" class="bulleted-list"><li style="list-style-type:disc">Policies (User, Role, Resource, Condition)</li></ul></blockquote><p id="07db78ae-c345-4ef8-9c4a-231815ee49a9" class="">GCP IAM permission management</p><figure id="e473095e-2f85-4323-9f28-e868f7762dd2" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9f13065e821df655a2ad482876a82c97214ac201%252Fiam-overview-basics.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=6176e516&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9f13065e821df655a2ad482876a82c97214ac201%252Fiam-overview-basics.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=6176e516&amp;sv=1"/></a></figure><blockquote id="5364bae2-2256-43c8-ade9-3e1f26290626" class="">🔗 Azure AD<ul id="2a8a11c0-9277-4575-992c-4d6c39d72662" class="bulleted-list"><li style="list-style-type:disc">Users, Groups, Roles</li></ul><ul id="ec580a7e-2aa3-461c-aef4-67c6ac1c2c65" class="bulleted-list"><li style="list-style-type:disc">Federated Users</li></ul></blockquote><p id="eb0a7db8-0932-4d66-b4a1-c19f747c147b" class="">Azure AD - IAM</p><figure id="e69377df-2657-4d8c-a025-23d53103df54" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-3749deef8a567d38dff36b2e08eabefd33f31a40%252Fidentity-basic-architecture.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=25b88452&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-3749deef8a567d38dff36b2e08eabefd33f31a40%252Fidentity-basic-architecture.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=25b88452&amp;sv=1"/></a></figure><blockquote id="34f5b377-c7aa-4c4d-9039-dcaa19d88baf" class="">🔗 AWS IAM<ul id="e2308191-8c36-4f75-b220-d140881243e9" class="bulleted-list"><li style="list-style-type:disc">Users, Groups, Permissions</li></ul><ul id="45b20a7e-332e-41a5-ab1c-7b92fcb98086" class="bulleted-list"><li style="list-style-type:disc">Federated Users</li></ul><ul id="4ee09804-f6f6-4bf7-93c3-8d3a9cb6ae9a" class="bulleted-list"><li style="list-style-type:disc">Policies grant permissions (Effect, Action, Resources, Conditions)</li></ul></blockquote><p id="9b6ba65e-f9f7-40bd-bf43-f56c07f6d4be" class="">AWS IAM</p><figure id="fabaff31-a0c5-4699-8655-60e4fb6405a3" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-0b76179af38e815bd5338009c0b813f65c5c1360%252Fiam-how-it-works-diagram.04a2c4e4a1e8848155840676fa97ff2146d19012.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=8f449c2e&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-0b76179af38e815bd5338009c0b813f65c5c1360%252Fiam-how-it-works-diagram.04a2c4e4a1e8848155840676fa97ff2146d19012.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=8f449c2e&amp;sv=1"/></a></figure><p id="5420fab5-7f24-4394-996b-94f09e84dc0f" class="">AWS IAM</p><figure id="9458ad4b-2825-4acb-a848-be9079aff68d" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8402dcf617fcbd8ec9b91dfb1b2cf20d896d2454%252Fimage-20230528131353486.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=a2e0ab75&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8402dcf617fcbd8ec9b91dfb1b2cf20d896d2454%252Fimage-20230528131353486.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=a2e0ab75&amp;sv=1"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

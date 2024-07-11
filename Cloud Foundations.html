@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cloud Foundations</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a7cd7944-f5cb-4ed4-aa36-534e81031bda" class="page mono"><header><h1 class="page-title">Cloud Foundations</h1><p class="page-description"></p></header><div class="page-body"><blockquote id="601670d3-952c-4ea2-bad4-177376ad8095" class="">📕 Learning Objectives<ul id="0ce8b2d7-e57a-4cda-9dfa-0e26406cc071" class="bulleted-list"><li style="list-style-type:disc">Define <strong>cloud</strong> and identify cloud services and providers</li></ul></blockquote><p id="07633ca2-8dbf-43f9-b15a-f6a713e67822" class="">📍 <em><strong>The cloud is just someone else&#x27;s computer.</strong></em></p><h2 id="d02843d2-4009-4c34-bf89-6598c31e0b2c" class=""><strong>Basics</strong></h2><table id="6011e9ad-4973-4c8e-a70c-87eefa3b0ae2" class="simple-table"><tbody><tr id="3f3bb49f-a8b1-4ef2-9f41-96b16abd8a7d"><td id="aKxf" class="">On-Premises Information System Architecture</td><td id="YAk]" class=""></td></tr><tr id="9adc21fb-7640-426f-838f-04832b4baf02"><td id="aKxf" class="">Workload</td><td id="YAk]" class=""></td></tr><tr id="7ab44e95-fd47-4faa-8527-b32040497268"><td id="aKxf" class="">Services</td><td id="YAk]" class=""></td></tr><tr id="fbc19a63-13b4-4128-b26f-3728d7ff9549"><td id="aKxf" class="">Virtual Machines</td><td id="YAk]" class=""></td></tr><tr id="cb9440e5-6ac2-41ea-813b-6e4cc9cbfa0d"><td id="aKxf" class="">Virtualization</td><td id="YAk]" class="">Platforms, Maintenance, Licensing</td></tr><tr id="90575173-4254-40a9-a959-82bbfcf54b03"><td id="aKxf" class="">Physical Infrastructure</td><td id="YAk]" class="">Network, Power, Racks, Storage</td></tr><tr id="33ebda69-25cf-4f77-a277-3d391bd57482"><td id="aKxf" class="">Physical Facility</td><td id="YAk]" class="">Cost of space, Physical Security</td></tr></tbody></table><p id="f66678ed-bfea-4d23-bf23-6a596b04ac75" class="">On-Premises - BMC</p><figure id="73e49c42-9a64-4a0a-8f46-70d819759505" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-477f228d884e959ce6b9b40fb0a07b3bccb5ec31%252Fimage-20230527114751073.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=29533809&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-477f228d884e959ce6b9b40fb0a07b3bccb5ec31%252Fimage-20230527114751073.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=29533809&amp;sv=1"/></a></figure><p id="2eac36a0-14f4-4af7-b69c-8216c0e0a370" class="">Cloud Architecture is the same as the above on-premises architecture, but it takes care of the physical infrastructure by providing it with built-in security and redundancy at a large scale.</p><p id="46a23fd5-e814-4b7c-934b-3cfe4b7ce3bf" class="">In addition, the <strong>management plane</strong> relates to the management and control of the cloud infrastructure and services, with key functions like monitoring, resource provisioning/allocation, configuration, security controls, troubleshooting, etc.</p><p id="5084079a-a126-4122-a9ee-08fa4c06c8e9" class="">Cloud Architecture</p><hr id="a1781152-ca6f-4610-a4ca-d0a7e4977827"/><p id="dfb2e602-62c2-4bfc-b01c-d2aa0c5eb89c" class="">Workload</p><hr id="13e9715f-e9cb-474e-b11a-eb10139e2b4a"/><p id="f4e4bfec-c283-4cbd-8469-e7e2ab060a51" class="">Services</p><hr id="7cb37aa4-a10a-4b24-9ba0-d7c05f3cf759"/><p id="500667dd-5f0f-4837-a4fe-8e49649406ca" class="">Virtual Machines</p><hr id="5385cd89-d977-4329-8472-09d37d1a8079"/><p id="02af2225-aea6-4f8e-a047-633c072dec14" class="">Management Plane</p><hr id="2fea50a3-d558-4d07-8948-5de272ebadb1"/><p id="2163cddd-7e2f-4736-a924-17b2676aaa6a" class="">Virtualization</p><hr id="ec11d07c-41fc-4812-bbfb-c8147f3c1e72"/><p id="e08edd53-6d80-4a17-abf8-ed848bb39154" class="">Physical Infrastructure</p><hr id="7fe011e3-ed2d-4512-b075-263bd77fc58f"/><p id="209bf4f2-5cff-4f24-826e-47e2dec0260d" class="">Physical Facility</p><hr id="553811a1-803d-478c-92cb-03eeb995ad4b"/><h3 id="9adafefa-bed1-4974-af27-79a5d9be3b41" class=""><strong>Types of Cloud Services</strong></h3><p id="2f147d0c-2990-46ab-9798-a428f25dfbe4" class=""><strong>Workload level</strong> - <em>Software as a Service (SaaS)</em></p><ul id="ff02f9db-3073-4a72-a993-ed72c9a4f401" class="bulleted-list"><li style="list-style-type:disc"><strong>SaaS</strong> - software applications are delivered over the internet as a service (e.g. Google Tools, Microsoft365, etc).</li></ul><p id="3c16a64c-4144-4c57-958c-83db61cbb800" class=""><strong>Services level</strong> - <em>Platform as a Service (PaaS)</em></p><ul id="85866144-5837-46c9-9afc-faaf442c02a6" class="bulleted-list"><li style="list-style-type:disc"><strong>PaaS</strong> - provides a complete runtime environment for developers to build, deploy and manage applications.</li></ul><p id="c5d77d48-88dd-4c23-96cb-11b870789ee9" class=""><strong>Virtual Machine level</strong> - <em>Infrastructure as a Service (IaaS)</em></p><ul id="c66a3308-933b-4aba-82e8-f13ccfb71040" class="bulleted-list"><li style="list-style-type:disc"><strong>IaaS</strong> - virtualized computing resources (virtual machines, storage, networking components) are provided by the cloud provider to users over the internet as a service.</li></ul><p id="5336f13f-9993-4476-a003-00e5bc8680dc" class="">These Cloud services types support levels of customization and can also offer a range of distinct &quot;<em>as a Service</em>&quot; options.</p><p id="8d073b10-d1c0-4edf-bfc2-ba021faa014f" class="">When moving from IaaS to SaaS, <em>ease of administration</em> increases and <em>control</em> is reduced, and vice versa.</p><p id="2603268f-635f-42b4-874d-a9dfb36f6be9" class="">SaaS vs PaaS vs IaaS - BMC</p><figure id="06ef16ec-6003-4ede-a921-ea18e9981eeb" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-4e678ba65c461b057f2a81f57093afad1fc0123a%252Fsaas-vs-paas-vs-iaas.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=ede15e5a&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-4e678ba65c461b057f2a81f57093afad1fc0123a%252Fsaas-vs-paas-vs-iaas.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=ede15e5a&amp;sv=1"/></a></figure><p id="22f3e267-bb77-41a2-bcfa-ebd30f824edf" class="">wisedatadecisions.com</p><figure id="2d838bfa-00c8-4406-bf76-d603a6e97ad1" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-79e9592c303116735547313f9c1063a4ad2c8953%252Fiaas-paas-saas.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=314e2184&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-79e9592c303116735547313f9c1063a4ad2c8953%252Fiaas-paas-saas.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=314e2184&amp;sv=1"/></a></figure><p id="40696635-13df-47f6-9c68-d077c55eaf3e" class="">Cloud services can be accessed through the Internet or via a private VPN Connection.</p><h3 id="4d8ba7d0-29ef-4398-8cd1-cf5175bc89ee" class=""><strong>Cloud Providers</strong></h3><blockquote id="478977eb-e284-4928-b44e-d8bab55cee4b" class="">Amazon Web Services (AWS)Microsoft AzureGoogle Cloud Platform (GCP)IBM CloudOracle Cloud Infrastructure (OCI)Alibaba CloudSalesforce CloudVMware CloudDigital OceanRackspaceCisco Cloud ServicesRed Hat OpenShiftHerokuSAP Cloud PlatformAdobe Experience Cloud<p id="eaf6efd0-3fd7-4832-add2-f2251f0d6d8a" class="">(not exhaustive list)</p></blockquote><blockquote id="fe9d04ab-b270-4f16-9be8-40d881ffdb65" class="">🔗 About Cloud Market Share<p id="9e1521d8-6c9d-4659-9d93-64c350ebe3b8" class="">🔗 By <a href="https://www.idc.com/getdoc.jsp?containerId=prUS49420022">IDC - Worldwide Public Cloud Services Revenue and Year-over-Year Growth 2021</a></p></blockquote><p id="260ad48f-9bf6-4cab-978b-6f09e99089fd" class="">IDC Worldwide Semiannual Public Cloud Services Tracker, 2H 2021</p><figure id="b376456f-7fcf-476c-b526-edb8ca6e02cd" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-811685afce9ced661c4438e707b2ef3972904036%252Fidc-market-share.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=c21c8a26&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-811685afce9ced661c4438e707b2ef3972904036%252Fidc-market-share.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=c21c8a26&amp;sv=1"/></a></figure><p id="25372268-ec49-49c2-828d-8144d6a26f0c" class="">Synergy Research Group</p><figure id="28ef52d1-9811-4d48-9183-13b6b3669c28" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-42ffcf9dc9f0f6ef2f1977e337461dd41fcf50fd%252Fcloud-infrastructure.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=2b1f563c&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-42ffcf9dc9f0f6ef2f1977e337461dd41fcf50fd%252Fcloud-infrastructure.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=2b1f563c&amp;sv=1"/></a></figure><blockquote id="5c797435-57cf-439a-a734-35bbb687bcee" class="">🔗 Gartner Says More Than Half of Enterprise IT Spending in Key Market Segments Will Shift to the Cloud by 2025</blockquote><p id="fb9b3ad4-b01c-43eb-a404-1b9d5c46a294" class="">Gartner - Feb 2022</p><figure id="f81a53da-ceca-4da4-a585-45e08546dc23" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-2cb6c9b35832deb844d09a91dd9cc9e8403cbccb%252Fcloud-versus-traditonal.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=40f60d2b&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-2cb6c9b35832deb844d09a91dd9cc9e8403cbccb%252Fcloud-versus-traditonal.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=40f60d2b&amp;sv=1"/></a></figure><h3 id="731451b7-f2a6-445f-969e-8c9af01e1bb7" class=""><strong><a href="https://aws.amazon.com/what-is-aws/">Amazon Web Services (AWS)</a></strong></h3><ul id="56e24bc1-54b8-477f-8b0f-decd9a7ae036" class="bulleted-list"><li style="list-style-type:disc"><strong>AWS</strong> is a leading cloud computing platform with a market share of around 33% (Q1 2022). It operates in 31 geographic launched regions, has over 200 services, and serves diverse industries. It offers job opportunities and certifications in AWS skills and is widely adopted by <a href="https://www.mytechmag.com/companies-that-use-aws/">companies</a> like Airbnb, Kellogg’s, Netflix, McDonald&#x27;s, The Guardian, etc.<ul id="42e0f6eb-148a-48e7-ae26-55fb23cc957f" class="bulleted-list"><li style="list-style-type:circle"><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">EC2</a> (Elastic Compute) instance - virtual machines</li></ul><ul id="61f89aac-504a-46e1-a8ea-d55c29f448a2" class="bulleted-list"><li style="list-style-type:circle"><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">S3</a> (Simple Storage Service) bucket - cloud storage space</li></ul></li></ul><p id="e4d08115-e999-49b2-9de4-2ba39b1ef06e" class="">AWS Home</p><figure id="ab24825e-2020-4240-9718-4a43ea46743d" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-f3c3041e3993f3c90de807b2e033e744f9220b4c%252Fimage-20230524142532754.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=9dc21338&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-f3c3041e3993f3c90de807b2e033e744f9220b4c%252Fimage-20230524142532754.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=9dc21338&amp;sv=1"/></a></figure><p id="29cffadd-4d05-4125-bdba-560f616cc3d1" class="">EC2 Instance</p><figure id="1fd1d7ee-7205-4b13-9cd7-7afb88867441" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-866c1a0367aef2d2aba43023e78a39378f80e601%252Fimage-20230524144115528.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=44d7748d&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-866c1a0367aef2d2aba43023e78a39378f80e601%252Fimage-20230524144115528.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=44d7748d&amp;sv=1"/></a></figure><p id="675c7693-7894-4097-bffc-03d5f110629b" class="">S3 Bucket</p><figure id="7787dc04-02a5-46a7-aa2a-6ecb78334d69" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9d82c18d5ad4dcc5663bd1043491ec6b3d30aa62%252Fimage-20230524144324268.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=72a3cd07&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9d82c18d5ad4dcc5663bd1043491ec6b3d30aa62%252Fimage-20230524144324268.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=72a3cd07&amp;sv=1"/></a></figure><h3 id="ed847510-350b-4ab3-8f06-49095dd02331" class=""><strong><a href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-azure/">Microsoft Azure</a></strong></h3><ul id="eb2b319e-87ea-4c11-8bec-2a4c4a707e95" class="bulleted-list"><li style="list-style-type:disc"><strong>Azure</strong> is a cloud computing platform with a worldwide presence (over 60 regions) and more than 600 services. Azure serves diverse industries and is used by notable <a href="https://www.cisin.com/coffee-break/enterprise/who-are-biggest-customers-of-the-microsoft-azure-platform.html">organizations</a> such as eBay, BMW and Walmart. It offers certifications for professionals in Azure technologies.<ul id="5e3a8fe8-9989-4ce2-a504-f9088d4f953e" class="bulleted-list"><li style="list-style-type:circle"><a href="https://learn.microsoft.com/en-us/azure/virtual-machines/">Virtual Machines</a></li></ul><ul id="e8b06676-64f8-467d-8543-91ff78101649" class="bulleted-list"><li style="list-style-type:circle"><a href="https://learn.microsoft.com/en-us/azure/storage/">Storage Account</a></li></ul></li></ul><p id="9b5249d8-105a-4f9b-a858-c17439713366" class="">Azure Services</p><figure id="3b852c41-b361-4ae5-ac72-ed77f48bec0f" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9315ade80ef13dd8d8450503c44214d3ae55288a%252Fimage-20230524150619515.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=45f577d&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-9315ade80ef13dd8d8450503c44214d3ae55288a%252Fimage-20230524150619515.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=45f577d&amp;sv=1"/></a></figure><p id="4bd8d432-0337-4619-baa8-343f8d2b0e0c" class="">Azure Resources</p><figure id="70b1088e-a011-4607-a0d0-e57e75612c1e" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-89cb0f98f4c704b7ee5351f742e1676d5e242920%252Fimage-20230524152304131.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=237956ff&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-89cb0f98f4c704b7ee5351f742e1676d5e242920%252Fimage-20230524152304131.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=237956ff&amp;sv=1"/></a></figure><h3 id="48952269-c16e-4e67-85a0-a58e86d7108e" class=""><strong><a href="https://cloud.google.com/docs/overview/">Google Cloud Platform (GCP)</a></strong></h3><ul id="c41b6f09-322e-40ef-a6cb-b219a6a4da6d" class="bulleted-list"><li style="list-style-type:disc"><strong>GCP</strong> is a major cloud provider with a global infrastructure spanning over 70 zones and 20 regions, serving diverse industries and notable <a href="https://cloud.google.com/customers">customers</a> such as Twitter and PayPal. In Q1 2021, Google Cloud reported revenue of $4.05 billion. GCP is known for its data analytics and machine learning capabilities and emphasizes sustainability. Certifications are available for professionals in GCP technologies.<ul id="67bdc2f7-fb4c-4ffc-a630-c64510763642" class="bulleted-list"><li style="list-style-type:circle">Compute Engine API - for virtual machines</li></ul><ul id="cf998bef-70cd-44f5-9849-2725371b7e3a" class="bulleted-list"><li style="list-style-type:circle">Cloud Storage Buckets</li></ul><ul id="283ebae2-eac9-4444-a13f-d02c3b1081bb" class="bulleted-list"><li style="list-style-type:circle">Cloud Run - containerized applications</li></ul></li></ul><p id="708cf566-5051-4afe-aba8-5fed7114fe49" class="">Google Cloud Console</p><figure id="82f66fb8-45ae-4c1b-a3e7-053f9195332e" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-730bd7e9a620416b04adeb19f0deb43b01e819ce%252Fimage-20230524155415333.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=4f567e97&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-730bd7e9a620416b04adeb19f0deb43b01e819ce%252Fimage-20230524155415333.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=4f567e97&amp;sv=1"/></a></figure><p id="91cfa519-8864-4f99-99b4-36cd83cc6f5f" class="">Google Cloud Compute Engine</p><figure id="d1c66a8b-6bc1-415c-91e7-3f5cc463f82f" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-80be0fff35a2008edf70e3e8200bf353f9000151%252Fimage-20230524155740987.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=a7ec60f2&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-80be0fff35a2008edf70e3e8200bf353f9000151%252Fimage-20230524155740987.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=a7ec60f2&amp;sv=1"/></a></figure><h3 id="05900f8b-5caa-406e-8c78-1e6e1ab81003" class=""><strong>Why Cloud</strong></h3><p id="31cd4878-ae1a-4856-8a21-1e08cd9c51b1" class="">The key advantages of choosing cloud computing are:</p><ul id="01076d40-5bbb-4155-953d-80e567da7ad2" class="bulleted-list"><li style="list-style-type:disc">Scalability - easily adjust resources based on demand.<ul id="fe224890-b042-4543-942d-56e9924b90a4" class="bulleted-list"><li style="list-style-type:circle">capacity-based spending</li></ul></li></ul><ul id="dc636a5a-26b4-479f-87df-6e5b6d52089c" class="bulleted-list"><li style="list-style-type:disc"><strong>Cost</strong> Efficiency - pay only for what you use, no upfront investment.<ul id="14420b5f-673b-490b-9f24-e4472d48f009" class="bulleted-list"><li style="list-style-type:circle"><strong>consumption-based spending</strong> (functions, services, storage)</li></ul></li></ul><ul id="cc15e81d-b5e2-4ae7-85cb-d81c8d620cbf" class="bulleted-list"><li style="list-style-type:disc">Accessibility and Flexibility - access applications and data from anywhere.</li></ul><ul id="0176c00f-a5fe-42a9-9cbc-0945ca8243f3" class="bulleted-list"><li style="list-style-type:disc">Reliability and <strong>Availability</strong> - high uptime and built-in redundancy.<ul id="5bae571e-00a3-429b-8069-ae1d2b68f2cb" class="bulleted-list"><li style="list-style-type:circle">minimized administrative overhead</li></ul></li></ul><ul id="7142c1c7-24c7-4903-951d-087456004397" class="bulleted-list"><li style="list-style-type:disc">Data <strong>Security</strong> and Compliance - robust security measures and regulatory compliance.</li></ul><ul id="5c5936c0-1de1-4b8f-8bf3-4129c363832b" class="bulleted-list"><li style="list-style-type:disc">Disaster Recovery and Backup - automated backup and quick recovery options.</li></ul><ul id="6098f57f-9a09-4547-a22b-ac5f22cdd7a2" class="bulleted-list"><li style="list-style-type:disc">Collaboration and Productivity - real-time collaboration and increased efficiency.</li></ul><ul id="ae7a044d-f766-4faa-a44d-64019dd62e9f" class="bulleted-list"><li style="list-style-type:disc">Innovation and Agility - rapid adoption of new technologies and services.</li></ul><ul id="995d1248-ddb0-4e5e-b945-3bb6aa676eed" class="bulleted-list"><li style="list-style-type:disc">Green and Sustainable Computing - energy-efficient infrastructure.</li></ul><ul id="33d72211-aa15-4dae-8aa4-c5ba0769c6d9" class="bulleted-list"><li style="list-style-type:disc">Continuous Updates and Maintenance - provider handles maintenance and updates.</li></ul><blockquote id="98c47419-aa00-42c4-bdee-ec06ffec7ec8" class="">🔗 CapEx vs OpEx in Cloud Computing</blockquote><p id="c4191f4d-677f-47f2-97cd-025b74416ac8" class=""><strong>CapEx</strong> (Capital expenditure) - <code>e.g.</code> on-premises capacity expansion/reduction</p><ul id="8065cd92-20d7-4b78-9766-7b3be05e01b0" class="bulleted-list"><li style="list-style-type:disc">hardware and licensing, replace/sell equipment</li></ul><p id="ae8a6a82-a5d2-4122-9d6f-0682e849c962" class=""><strong>OpEx</strong> (Operating expenses) - <code>e.g.</code> cloud-based capacity expansion/reduction</p><ul id="51418302-e3da-4f51-9f57-fc93b3e41a11" class="bulleted-list"><li style="list-style-type:disc">pay for what is used, no hardware purchase</li></ul><ul id="2835af50-28fa-4c40-8850-e92cb0104080" class="bulleted-list"><li style="list-style-type:disc">reduce monthly cost, no upfront capital costs</li></ul><p id="a2d464ca-708b-4102-9496-9e0b2ec69d81" class=""><em>Moving to the cloud might not be a good idea in case of ongoing operational investments, regulatory compliance and data fencing.</em></p><h2 id="ea065d74-4f63-432f-84eb-8a50e034c15f" class=""><strong>Management</strong></h2><h3 id="85878125-52bd-46a5-af2c-5042d48efe7c" class=""><strong>Tools</strong></h3><ul id="6ea7b70e-1b1e-440c-a171-ec8bafbc7a41" class="bulleted-list"><li style="list-style-type:disc"><strong>Web-based</strong> cloud management tools<ul id="dc8c0323-820f-4f60-a56e-f09c01a9a459" class="bulleted-list"><li style="list-style-type:circle"><a href="https://console.aws.amazon.com/">AWS Console</a></li></ul><ul id="babb3116-94d8-4e76-a6d8-805198881ce2" class="bulleted-list"><li style="list-style-type:circle"><a href="https://portal.azure.com/">Azure Portal</a></li></ul><ul id="98ec261f-b577-49b4-8d2a-d95811275a9a" class="bulleted-list"><li style="list-style-type:circle"><a href="https://console.cloud.google.com/">GCP Console</a></li></ul></li></ul><ul id="5192f976-aae0-4429-8c67-d0b1a61a3590" class="bulleted-list"><li style="list-style-type:disc">Command line interface (<strong>CLI</strong>) and Powershell CLI<ul id="8bead577-c904-49c3-a7cd-0e48560894ec" class="bulleted-list"><li style="list-style-type:circle"><a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">AWS CLI</a><ul id="e1a5031e-a332-4dea-9b13-d4a162eec07f" class="bulleted-list"><li style="list-style-type:square"><a href="https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html">PowerShell</a></li></ul></li></ul><ul id="3eb8f29f-bec6-499c-8056-f507345baab2" class="bulleted-list"><li style="list-style-type:circle"><a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">Azure CLI</a><ul id="d0d01deb-7f4d-4c0d-98b7-5d56bb496ebb" class="bulleted-list"><li style="list-style-type:square"><a href="https://learn.microsoft.com/en-us/cli/azure/choose-the-right-azure-command-line-tool">Azure PowerShell</a></li></ul></li></ul><ul id="036d9c3b-2be0-4935-9296-9c45ee7ecdf3" class="bulleted-list"><li style="list-style-type:circle"><a href="https://cloud.google.com/sdk">Google Cloud SDK</a><ul id="d42ad8ab-0649-41c3-9a4b-08ddc9f92171" class="bulleted-list"><li style="list-style-type:square"><a href="https://cloud.google.com/tools/powershell/docs/quickstart">Cloud Tools for PowerShell</a></li></ul></li></ul><ul id="9fbaca21-0830-4b19-ab2e-2b5ba307b1a8" class="bulleted-list"><li style="list-style-type:circle">Cloud shell (<a href="https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html">AWS</a>, <a href="https://learn.microsoft.com/en-us/azure/cloud-shell/overview">Azure</a>, <a href="https://cloud.google.com/shell">GCP</a>)</li></ul></li></ul><p id="883dd493-1cc1-4574-984a-e33471c68185" class="">AWS CloudShell</p><figure id="e14a2067-71f3-4210-aace-205a62b1fc86" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-a9c89bf06226871da82f39c3ea2220c62a1c1420%252Fimage-20230524144600467.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d41c8264&amp;sv=1"><img style="width:462px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-a9c89bf06226871da82f39c3ea2220c62a1c1420%252Fimage-20230524144600467.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d41c8264&amp;sv=1"/></a></figure><ul id="d7509292-9142-4561-9db5-86c4a6ef1146" class="bulleted-list"><li style="list-style-type:disc"><a href="https://restfulapi.net/">REST API</a> - an <strong>API</strong> (Application Programming Interface) that conforms to the constraints of <strong>REST</strong> (Representational State Transfer) architectural style, allowing interaction with RESTful web services.<ul id="bd602f53-26e6-474a-894f-d66283cdfa2e" class="bulleted-list"><li style="list-style-type:circle">the cloud can be integrated into third parties management tools</li></ul><ul id="66ac857b-3c11-4f78-b075-d17f0da7791e" class="bulleted-list"><li style="list-style-type:circle"><a href="https://cloud.google.com/apis">Google Cloud APIs</a></li></ul></li></ul><h3 id="29dbe0b6-5139-48d4-878d-061ea91cfcd6" class=""><strong>Cost</strong></h3><p id="94ecfaea-2550-4f85-8b6c-2b9dd52c662d" class=""><strong>Pricing Models</strong></p><ul id="75f7897d-594a-4e16-b558-58e12aa003ca" class="bulleted-list"><li style="list-style-type:disc"><em>Capacity</em>: <code>e.g.</code> Virtual machines - per second/minute/hour basis</li></ul><ul id="ce0df445-4090-42b0-9662-9d2038627efb" class="bulleted-list"><li style="list-style-type:disc"><em>Consumption</em>: <code>e.g.</code> Storage/functions/service - pay for the amount (transaction cost)</li></ul><ul id="d0afb142-1dc5-4a87-833a-a3a731bde318" class="bulleted-list"><li style="list-style-type:disc">both</li></ul><ul id="e69c3e9d-f97e-4d17-a636-7b296f0f07d6" class="bulleted-list"><li style="list-style-type:disc">fixed cost</li></ul><ul id="8a4580f7-3f23-4acf-bb4a-e90c6f7e3fa2" class="bulleted-list"><li style="list-style-type:disc">data transfer, egress cost</li></ul><ul id="9cf7f137-9b29-47b6-9fe7-bf5197be8935" class="bulleted-list"><li style="list-style-type:disc">Marketplace Billing (3rd party vendor support additional cost)</li></ul><blockquote id="9ce4da3f-45c8-4ec2-ba1e-d5abce56acef" class="">📌 Calculators<ul id="2b22d58f-80f8-4aac-86db-bf204891295a" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://azure.microsoft.com/en-us/pricing/calculator/">Azure Pricing Calculator</a></li></ul><ul id="06a754f9-edad-4194-90be-b603b1962cbc" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://calculator.aws/#/">AWS Pricing Calculator</a></li></ul><ul id="d62ced5e-67c9-44c3-977b-756e33c9b93b" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://cloud.google.com/products/calculator">Google Cloud Pricing Calculator</a></li></ul></blockquote><p id="4821eacf-890a-47a9-bff7-1d2b1f83bca2" class=""><strong>Billing</strong>, <strong>Monitoring</strong>, <strong>Optimization</strong></p><p id="8e390b69-1d90-42e8-a489-7e1d058582bb" class="">There are different billing <strong>entities</strong> (what is being billed), with a billing <strong>cycle</strong> that is generally a month. Optimize billing <strong>rate</strong> with billing <strong>management</strong> tools.</p><p id="0cc60ced-3275-47ed-b3d8-d53f3fb2966e" class=""><strong>Budgets</strong> and <strong>alerts</strong> are useful for monitoring.</p><p id="38b13cdb-c117-4345-a26c-7704b43e7be0" class=""><strong>Agents</strong> (Azure advisors, Google recommenders, AWS cost anomaly detection) monitor the cloud patterns and make recommendations for cost-cutting, <strong>sizing</strong> and <strong>autoscale</strong> strategies. <em>Serverless</em> options and long-term commitments (discounts, etc) can be useful too.</p><p id="f1670663-785e-4d0f-bf04-b0d0a7237503" class="">AWS Pricing</p><figure id="fc729a7f-a520-4281-a960-e6680666d3ce" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-f1bd4b26c2523db774ddff19276eec014ce8dae7%252Fimage-20230527110307473.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d05b0257&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-f1bd4b26c2523db774ddff19276eec014ce8dae7%252Fimage-20230527110307473.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d05b0257&amp;sv=1"/></a></figure><p id="4361916a-d8f0-4244-abb4-206b6f3f2518" class="">Azure Pricing</p><figure id="2df4e8c3-c176-425c-8dc1-93fe0360c325" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-500302a33eda12181feaed2f94f893ec776aed7d%252Fimage-20230527113535921.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=679576fc&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-500302a33eda12181feaed2f94f893ec776aed7d%252Fimage-20230527113535921.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=679576fc&amp;sv=1"/></a></figure><p id="23468a9f-4674-4d20-a0dc-4b04f3adfa0e" class="">Google Cloud Pricing</p><figure id="6f3529ca-9583-498e-96ec-7d702fc80a18" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-0fd4bef22655f8714f377807bb1e6f297c31f7e6%252Fimage-20230527113928988.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=e4152522&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-0fd4bef22655f8714f377807bb1e6f297c31f7e6%252Fimage-20230527113928988.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=e4152522&amp;sv=1"/></a></figure><h3 id="495ced0a-6691-4b62-b0af-ad3690e28f54" class=""><strong>Support</strong></h3><p id="cd3155f4-14b1-4bf4-b35a-57c6b78ca62f" class="">Cloud <strong>resource responsibility</strong> refers to the distribution of responsibilities between the cloud service provider (CSP) and the cloud customer regarding the management and maintenance of various aspects of the cloud environment.</p><ul id="a4b3a61a-a337-4b6c-89b5-ff697504f9d8" class="bulleted-list"><li style="list-style-type:disc">The specific responsibilities allocated to each party can vary based on the cloud service model being used (<code>e.g.</code> IaaS, PaaS, SaaS) - shared responsibility model.<ul id="2d7682c1-0f89-47c5-8f44-0d1e5daef696" class="bulleted-list"><li style="list-style-type:circle">CSP - infrastructure, data centers, networking, physical security, hardware maintenance</li></ul><ul id="b53990b8-c019-42d2-8c1b-d7eb180b0fad" class="bulleted-list"><li style="list-style-type:circle">Customer - resources and services management and configuration (data plane)</li></ul></li></ul><p id="f6e316ef-a451-4b77-bc7a-96f3d271b1f3" class="">Defending the Whole, IaaS, PaaS, and SaaS from Mark Nunnikhoven</p><figure id="80bd0d42-c5fb-403f-a854-5be3fff153e3" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-212d48ee08dcfee819d9990b345e343d70f6e948%252Fimage-20230527114523623.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=14557a9d&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-212d48ee08dcfee819d9990b345e343d70f6e948%252Fimage-20230527114523623.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=14557a9d&amp;sv=1"/></a></figure><p id="5986dc54-6d7d-48ab-bfa7-441ed4d1d674" class="">In terms of <strong>SLA</strong>s (<strong>S</strong>ervice <strong>L</strong>evel <strong>A</strong>greements), the customer can be responsible for the workload and services that are running. <em>The </em><em><strong>SLA</strong></em><em> is a contractual agreement between a service provider and a customer that defines the expected level of service and the metrics by which that service will be measured.</em></p><blockquote id="ad8d01b7-a163-4416-ba21-548d22620d67" class="">📌 SLAs<ul id="1f785ba0-efc5-4bb2-a7ab-e588b64564e3" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://aws.amazon.com/legal/service-level-agreements/">AWS - Service Level Agreements (SLAs)</a></li></ul><ul id="7a1f2155-6c9a-45f0-a90e-ac2f42f82a62" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services">Azure - Service Level Agreements (SLA) for Online Services</a></li></ul><ul id="f105c67d-01ee-426c-8a17-31a72946fbee" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://cloud.google.com/terms/sla/">Google Cloud Platform - Service Level Agreements</a></li></ul></blockquote><p id="9e201b9d-cc12-4036-ac9e-5ed5f31a4933" class="">Cloud <strong>support</strong> refers to the assistance and services provided by the CSP to support the customer in effectively utilizing and managing cloud resources and services.</p><p id="aa7b1756-89dd-4c16-a582-e059514a3c7d" class=""><code>e.g.</code> Technical assistance, issue resolution, service monitoring, configuration and deployment assistance, kb and documentation, SLAs, service upgrades and training.</p><blockquote id="6a31f9fd-238d-487b-926a-af99c5559640" class="">📌 Support Plans<ul id="ff5b082e-a3c0-4ecd-b8a1-7ef79d06f916" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://aws.amazon.com/premiumsupport/pricing/">AWS Support Plan Pricing</a></li></ul><ul id="8686e3fd-f203-455c-82e5-7dd2affd5d3d" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://azure.microsoft.com/en-us/support/plans/">Azure Support Plans</a></li></ul><ul id="5280a459-a058-4526-a35f-6ba0c7b59141" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://cloud.google.com/support/">Google Cloud Customer Care</a></li></ul></blockquote><h2 id="7b51358b-2383-4d7c-be32-c1bb9fa70a70" class=""><strong>Services</strong></h2><p id="1698b3ce-61da-492e-99e7-19ddf52ffb90" class="">Aws vs Azure vs GCP - blogs.vmware.com</p><figure id="e009fd80-e234-422f-b61f-c0c22ae87356" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-1402a36f7fc2a3ec9e0d284f8ecc198371469480%252FAws-vs-Azure-vs-GCP.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=35877206&amp;sv=1"><img style="width:682px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-1402a36f7fc2a3ec9e0d284f8ecc198371469480%252FAws-vs-Azure-vs-GCP.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=35877206&amp;sv=1"/></a></figure><p id="f73d4de0-231f-47e9-9944-af870eb15c78" class="">Serverless on AWS vs Azure vs Google Cloud</p><figure id="05af1a23-e646-494b-bb9c-695691f87b83" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-3c37ed242650642db82faf682be04e363732d278%252Fcloud-deployment-cheatsheet.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=aaf074ea&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-3c37ed242650642db82faf682be04e363732d278%252Fcloud-deployment-cheatsheet.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=aaf074ea&amp;sv=1"/></a></figure><h3 id="35d73cec-5085-42cf-93ba-a5b40029eaa7" class=""><strong>IaaS</strong></h3><p id="b065fe7b-f1b1-4163-8653-9d6297e27e12" class="">IaaS - BMC</p><figure id="202962fb-4587-4bb9-950b-fd159a15adba" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-30061adf0c143da7520c11fd16635851874f937e%252Fimage-20230527114712728.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=91ca7b5a&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-30061adf0c143da7520c11fd16635851874f937e%252Fimage-20230527114712728.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=91ca7b5a&amp;sv=1"/></a></figure><p id="b210ff9f-1618-44d1-a6e7-f25c0cf04c52" class="">Cloud Provider - Infrastructure as a Service</p><hr id="b2b9840f-bfa6-4e38-bbe9-915de99e5b87"/><p id="421dabd1-a17a-41a3-87f9-786874061c68" class="">Physical Facility</p><hr id="e06a216f-4fde-48b0-8938-a2824ba6284f"/><p id="e432f566-aebe-4b08-8e52-a8e46f264667" class="">Physical Infrastructure</p><hr id="f7012cc0-8e11-4923-973f-d5bfa18f5ca7"/><p id="f5fd0edc-0e26-4d67-ba0d-d9b6abf6d84a" class="">Virtualization</p><hr id="eebed4cc-df2f-4e17-ab16-b9f92fad9b81"/><p id="16fd1b4b-b8e4-4292-a960-979ff600b728" class="">Management Plane</p><hr id="e1af63ec-2da6-4438-af1e-25126e9be56e"/><p id="f33f357a-7931-4fad-8c83-89391ec21275" class="">The customer is responsible for the <strong>Virtual Machines, Services and Workload</strong> levels.</p><h3 id="3ff61f84-71d2-4a46-b123-989d6fdd74ea" class=""><strong>Networking</strong></h3><p id="a854e9b7-2c98-4880-8e6e-25c0a4d00fe5" class="">A <strong>VPC</strong> (<strong>V</strong>irtual <strong>P</strong>rivate <strong>C</strong>loud) is a virtual network environment within a cloud computing platform, that provides isolated and secure networking capabilities, allowing users to create and manage their own virtual network infrastructure in the cloud.</p><ul id="0edcc055-9c29-444b-b2b8-89dcc3ae848a" class="bulleted-list"><li style="list-style-type:disc">Private networking, IP management, Subnets, Routing, DNS, Net Security/ACLs</li></ul><h3 id="b6650ee7-f9c0-4c14-95f5-9fa3d5923738" class=""><strong>Computing</strong></h3><p id="b576409c-c748-4165-8b9f-15a36fb28350" class="">A cloud <strong>instance</strong> (virtual machine - VM), is a virtualized computing environment created within a cloud computing platform. It represents a single, independent server instance that runs within the infrastructure of the cloud service provider.</p><ul id="210a3c4d-837a-4441-8242-4a58a2d7ac11" class="bulleted-list"><li style="list-style-type:disc">Size<ul id="d8cde3ac-5eb8-46b9-bd2e-530047a6de61" class="bulleted-list"><li style="list-style-type:circle">Series/Size/CPU/Ram</li></ul></li></ul><ul id="d936c67d-6362-4f7a-949f-1d0b11ead33e" class="bulleted-list"><li style="list-style-type:disc">Image (Win/Linux Operating System, Software, Custom)</li></ul><ul id="6051f2df-3396-4bcf-9d7f-bb6e7e271745" class="bulleted-list"><li style="list-style-type:disc">Storage</li></ul><ul id="b5e07141-352a-4b57-8ed6-70c2ced1d69a" class="bulleted-list"><li style="list-style-type:disc">Networking (VPC)</li></ul><ul id="4fde22e0-681a-4cd7-9f6b-c3f840da8eb5" class="bulleted-list"><li style="list-style-type:disc">Security Access</li></ul><ul id="d395f52d-8a9f-4d19-9096-c65c3a20b36f" class="bulleted-list"><li style="list-style-type:disc">Monitoring</li></ul><h3 id="ea209ef9-3dae-4236-9a60-76eebedbb857" class=""><strong>Storage</strong></h3><p id="d4c9e0bf-99a5-4b42-8319-cc854ac0d3a9" class="">Cloud <strong>storage</strong> refers to a data storage service provided by the CSP where data is stored and managed in a remote cloud infrastructure.</p><ul id="42b5e4a8-277f-4c6e-b443-8c829f4fca84" class="bulleted-list"><li style="list-style-type:disc">AWS<ul id="8c50caca-042b-469d-8095-f058b2c43b3c" class="bulleted-list"><li style="list-style-type:circle">S3 buckets, EFS, EBS</li></ul></li></ul><ul id="e7d8be25-a63a-4669-a787-6da415ea9798" class="bulleted-list"><li style="list-style-type:disc">Azure<ul id="2bab8fb2-b690-4b49-ac40-fcdb96e9f576" class="bulleted-list"><li style="list-style-type:circle">Storage account, Managed disks</li></ul></li></ul><ul id="6ca69c30-da64-4c98-bce2-f7ba210e49e6" class="bulleted-list"><li style="list-style-type:disc">Google Cloud<ul id="be6ae51b-cee4-424b-b826-91c38bfb8cff" class="bulleted-list"><li style="list-style-type:circle">Storage buckets</li></ul><ul id="ac6a1ba2-1971-467f-b16b-5fceafc9503e" class="bulleted-list"><li style="list-style-type:circle">Compute engine disks and images</li></ul></li></ul><p id="970ebc3c-d504-475a-82ac-ed5ab1a48ce2" class="">AWS nginx EC2 instance</p><figure id="bdf452bb-ace3-4708-8895-f9b7e6f9e3df" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8f0c646686f0537a1d2e8d0309f0307172b9a0f2%252Fimage-20230527123343418.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=b1351281&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8f0c646686f0537a1d2e8d0309f0307172b9a0f2%252Fimage-20230527123343418.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=b1351281&amp;sv=1"/></a></figure><p id="f1b6717f-a32e-4cef-8d77-ca6d0828ab3b" class="">Azure nginx Virtual Machine</p><figure id="cda64a53-e835-425e-97dd-60ba4fb559b9" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-b68f7d899ef4deb93986839a0b2be1f5246bbc3a%252Fimage-20230527124825572.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=20ff7a1c&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-b68f7d899ef4deb93986839a0b2be1f5246bbc3a%252Fimage-20230527124825572.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=20ff7a1c&amp;sv=1"/></a></figure><p id="29a59477-9dc8-4e20-a991-0af3020a5fe6" class="">GCP nginx VM instance</p><figure id="febc6334-9365-47a2-96da-1bccf52208f6" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-f8af2730fc2309213b9b864f415ec715565c728d%252Fimage-20230527130055844.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=87a66977&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-f8af2730fc2309213b9b864f415ec715565c728d%252Fimage-20230527130055844.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=87a66977&amp;sv=1"/></a></figure><h3 id="6be8c333-31a7-4294-90fb-238168a79f62" class=""><strong>PaaS</strong></h3><p id="da6669d5-7096-4e7a-aad1-83a601edb5bb" class="">PaaS - BMC</p><figure id="8dfee075-a093-4a49-9d34-afc0e623895d" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-b10cd147704f8ffa0a316704767afb04630a53cc%252Fimage-20230527114838554.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d55303e1&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-b10cd147704f8ffa0a316704767afb04630a53cc%252Fimage-20230527114838554.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=d55303e1&amp;sv=1"/></a></figure><p id="95f993f0-908e-46d3-bf06-afddff35c0db" class="">Cloud Provider - Platform as a Service</p><hr id="e9ad3a3d-5b5f-4702-a7fd-ab93ce7600b5"/><p id="d6c358c1-3ac8-44f2-ac2a-3d4a4fd2c71a" class="">Physical Facility</p><hr id="efa39b90-66c1-4d4c-9c56-83bd3c5c3d9c"/><p id="d4d1913d-69ba-4b7e-922e-433c76446ebd" class="">Physical Infrastructure</p><hr id="89ae532f-31ef-49f0-a4f2-bdd18b467661"/><p id="0038c772-5e92-4fd4-8a54-010db2b92771" class="">Virtualization</p><hr id="3cebfdc9-824a-4d5b-ab34-8d0f8be540db"/><p id="f3efdfb9-e217-4d9e-83b7-a962cfa76af8" class="">Management Plane</p><hr id="810482b9-6677-4146-860e-f5c1ffcf85fd"/><p id="eb45f47f-109f-4b3e-a102-888303155acf" class="">Virtual Machines</p><hr id="4f9dde75-45d3-4862-ac41-1a5ca4d2275c"/><p id="849129d0-11e1-4e4e-a0fe-80a944663103" class="">Services</p><hr id="f037d3be-fbab-4414-8369-b713bed0b7a4"/><p id="bc8ba163-78bb-4167-8691-5faddfae6cd9" class="">The customer is responsible only for the <strong>workload</strong> level.</p><ul id="b4c0605e-9517-4842-98c4-598610b4aa32" class="bulleted-list"><li style="list-style-type:disc">Application Hosting<ul id="f738f6ae-1a6f-4a58-9441-c846e426fd90" class="bulleted-list"><li style="list-style-type:circle">Containers</li></ul><ul id="a7d809fc-b4be-4d31-8965-1b3c39ed31f9" class="bulleted-list"><li style="list-style-type:circle">Various types of Apps</li></ul></li></ul><ul id="e436d742-40ef-4a1e-85fa-155ebf1db762" class="bulleted-list"><li style="list-style-type:disc">Data Hosting<ul id="867dc386-6bca-4940-b879-e8bc4d454870" class="bulleted-list"><li style="list-style-type:circle">Various types of databases</li></ul></li></ul><ul id="81751541-079d-486a-b557-6adff41f866d" class="bulleted-list"><li style="list-style-type:disc">Security, Media, Migration, Archiving, IoT, Cognitive, Machine learning Services, etc</li></ul><h3 id="237e3c68-7ebf-4093-928d-347917f41bda" class=""><strong>SaaS</strong></h3><p id="bcfb717c-b430-4eab-a0b4-db02ea56d6ec" class="">SaaS - BMC</p><figure id="f3f890d0-bad8-420d-aae5-6a58ac906bb4" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-ad923911c2c5686440952c7497e7b73fdc2830b9%252Fimage-20230527114859519.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=b62817b4&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-ad923911c2c5686440952c7497e7b73fdc2830b9%252Fimage-20230527114859519.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=b62817b4&amp;sv=1"/></a></figure><p id="ab6f6a2d-bd7d-4292-aea0-463264ca2793" class="">Cloud Provider - Software as a Service</p><hr id="d4de030d-b6f4-447f-87bb-2e4c2087b792"/><p id="b86e7e13-044a-4f53-9fbe-ea3b89099d10" class="">Physical Facility</p><hr id="97799a5f-4405-4a5d-8dec-07ece827447b"/><p id="de74339a-083c-4e23-a255-e0d21bf12169" class="">Physical Infrastructure</p><hr id="9bc996be-18db-474b-a982-19fd517010be"/><p id="12ac4ce4-57e4-411a-9bab-9a3a142825dc" class="">Virtualization</p><hr id="197a3a98-cc08-4bbb-825d-f81d5308e5ca"/><p id="6749cbb4-c8e4-46cd-9766-d76416b39033" class="">Management Plane</p><hr id="8cd660e1-5b4c-4de5-b508-47643e018f8e"/><p id="ee322ea8-3401-47ba-b68c-282c28dde01b" class="">Virtual Machines</p><hr id="a1f18750-4337-4bb9-8727-7135dfba257a"/><p id="eb418ebb-25f7-44c2-a825-b91959bd4c2e" class="">Services</p><hr id="ec794411-c96f-4710-8c5d-16020c249e22"/><p id="aee0bbfd-4eaa-4f7c-995a-74bfb1791441" class="">Workload</p><hr id="539073ec-964c-48f6-a163-cfad079d7535"/><p id="44470071-8f87-4383-90b4-3837c5faa11e" class="">The cloud SaaS provider supplies every level, but gives the customer the ability to manage the <strong>Workload</strong> level.</p><p id="1aedb721-e82c-4d5e-91f0-6d19663ea398" class="">Examples of SaaS software - taglineinfotech.com</p><figure id="e57eacab-0234-4b8f-aaf7-97ab53818155" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8c0cbd4bad46401436926bb664a938f1eab9857a%252F14-SaaS-Examples-You-Need-To-Know-in-2022-1024x512.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7716848a&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-8c0cbd4bad46401436926bb664a938f1eab9857a%252F14-SaaS-Examples-You-Need-To-Know-in-2022-1024x512.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=7716848a&amp;sv=1"/></a></figure><blockquote id="763910de-0712-441d-b0ce-d3a4d7f23106" class="">📌 SaaS Examples<ul id="101f4ff4-3efd-46c7-962a-21d9c7df0325" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://www.salesforce.com/">SalesForce</a></li></ul><ul id="6ea3bb1e-a77c-4453-b61d-90429cf1ec46" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://www.microsoft.com/">Microsoft365</a></li></ul><ul id="85467bce-b1d8-4f3b-88ab-bcd3ab41bed1" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://workspace.google.com/">Google Workspace (G Suite)</a></li></ul><ul id="121059c6-7204-4446-9a13-8d864b047950" class="bulleted-list"><li style="list-style-type:disc">Collaboration<ul id="2bcdae33-1255-4e87-9656-78569f879b4f" class="bulleted-list"><li style="list-style-type:circle">🔗 <a href="https://slack.com/">Slack</a></li></ul><ul id="32642726-ce5b-485f-b1c5-d187e9cf7e7b" class="bulleted-list"><li style="list-style-type:circle">🔗 <a href="https://zoom.us/">Zoom</a></li></ul><ul id="97c45541-6334-4191-8c05-19207d91aff4" class="bulleted-list"><li style="list-style-type:circle">🔗 <a href="https://www.microsoft.com/en-us/microsoft-teams/group-chat-software">Microsoft Teams</a></li></ul></li></ul><ul id="f556a02f-9922-41b0-a282-217c7c570b0f" class="bulleted-list"><li style="list-style-type:disc">Others like:<ul id="729b1612-600f-453b-a25f-8f5bda74c335" class="bulleted-list"><li style="list-style-type:circle">CRM (customer relations management),</li></ul><ul id="abbb8026-40b9-4e5c-9598-f4fc7c7b3030" class="bulleted-list"><li style="list-style-type:circle">Resource planning (SAP), Business continuity</li></ul><ul id="f4470354-f609-4fae-a536-b8065dc3ea3d" class="bulleted-list"><li style="list-style-type:circle">Content management systems, etc</li></ul></li></ul></blockquote><h3 id="ae92b50f-1ebf-4a52-879c-8e27ac09ec22" class=""><strong>Scalability &amp; Availability</strong></h3><p id="505ce9f0-db7d-477e-b313-eaeacfffe7e4" class="">GCP Global Locations</p><figure id="48c47b50-8239-4b91-8b56-9a6d8c1db674" class="image"><a href="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-00d06afcd676c1369385e8739b2d84387b6d69dc%252Fregions.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=2d813902&amp;sv=1"><img style="width:700px" src="https://blog.syselement.com/~gitbook/image?url=https%3A%2F%2F1996978447-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FlhjuckuLbvBn36EoFL7P%252Fuploads%252Fgit-blob-00d06afcd676c1369385e8739b2d84387b6d69dc%252Fregions.png%3Falt%3Dmedia&amp;width=768&amp;dpr=4&amp;quality=100&amp;sign=2d813902&amp;sv=1"/></a></figure><p id="24cbe0cb-7877-43e9-84b5-d3536487fb4a" class="">Cloud <strong>regional computing</strong> refers to the deployment of cloud computing resources within a specific geographic region.</p><p id="6266b9d9-99aa-4ef9-a326-e8a4d62b1a4e" class="">Cloud service providers typically have <strong>multiple data centers</strong> located in different regions around the world, and regional computing allows users to deploy and access their cloud resources in specific geographic areas/<strong>availability zones</strong>.</p><ul id="fb033d8d-b4d3-4cbe-9dba-44822e7232d9" class="bulleted-list"><li style="list-style-type:disc"><code>e.g.</code> - <a href="https://cloud.google.com/about/locations/">Google Cloud Global Locations</a></li></ul><p id="ed07f1f7-4e37-47df-a5a3-17949cb4f828" class=""><strong>Availability</strong> refers to the measure of how accessible and operational cloud services and resources are to users (load balancing, disaster recovery, redundancy, failover).</p><p id="69467384-96cc-4c38-904f-b38c1a0ebc40" class=""><strong>Cloud scale</strong> refers to the ability of cloud computing systems to handle large-scale workloads and accommodate rapid growth and demand. It refers to the capacity and capability of cloud infrastructure to scale resources, such as computing power, storage and network bandwidth, in response to varying workloads and user demands, also minimizing costs by <strong>auto-scaling</strong>.</p><ul id="43b32130-7138-4900-8ff3-60705c7a4739" class="bulleted-list"><li style="list-style-type:disc"><code>e.g.</code> - <a href="https://cloud.google.com/compute/docs/load-balancing-and-autoscaling">Google Cloud Load balancing and Scaling</a></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
